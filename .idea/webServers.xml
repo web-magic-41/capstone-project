@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="ae961e66-ce36-4c59-a462-e34129f279c1" name="capstone-project" url="http://ddc-web-student.cnm.edu/~dpadilla215/capstone-project">
-        <fileTransfer rootFolder="/home/dpadilla215/public_html/capstone-project" accessType="SFTP" host="ddc-web-student.cnm.edu" port="22" sshConfigId="a363ac2a-3525-4070-838f-7606eb79c83b" sshConfig="dpadilla215@ddc-web-student.cnm.edu:22 agent" authAgent="true">
+      <webServer id="ae961e66-ce36-4c59-a462-e34129f279c1" name="capstone-project" url="http://ddc-web-student.cnm.edu/~ewantling/capstone-project">
+        <fileTransfer rootFolder="/home/ewantling/public_html/capstone-project" accessType="SFTP" host="ddc-web-student.cnm.edu" port="22" sshConfigId="8a74efde-7511-4927-9c21-06d7e0e6fb0b" sshConfig="ewantling@ddc-web-student.cnm.edu:22 agent" authAgent="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
