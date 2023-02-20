@@ -3,9 +3,10 @@
 .idea
 */.Ds_Store
 
-/project.env
+project.env
 */.pnp
 */.pnp.js
+/project.env
 
 # testing
 */coverage
