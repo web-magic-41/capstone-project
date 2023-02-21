@@ -7,15 +7,16 @@ import { insertProfile, Profile } from "../../utils/models/Profile";
 import { Status } from "../../utils/interfaces/Status";
 
 export async function signupProfileController( request:Request, response: Response): Promise<Response|undefined> {
+
     try {
         const mailgun: Mailgun = new Mailgun(formData)
-        const mailgunClient: Client = mailgun.client({username: 'api', key: process.env.MailGun_API_KEY as string})
+        const mailgunClient: Client = mailgun.client({username: 'api', key: process.env.MAILGUN_API_KEY as string})
         //double check this
         const {profilePhoneNumber, profileUsername, profileEmail, profilePassword} = request.body
         const profileHash = await setHash(profilePassword)
         const profileActivationToken = setActivationToken()
         const basePath: string = `$(request.protocol)://$(request.hostname)/$(request.originalUrl)/activation/${profileActivationToken}`
-
+        console.log('hello again')
         const message = `<h2>Welcome to Burque MTG Finder.</h2>
         <p>In order to start posting listings of cards, you must confirm your account</p>
         <p><a href="${basePath}">${basePath}</a></p>
@@ -35,7 +36,7 @@ export async function signupProfileController( request:Request, response: Respon
         profileUsername,
         profilePhoneNumber
     }
-    console.log(profile)
+    console.log('testing 123')
     await insertProfile(profile)
 
     await mailgunClient.messages.create(process.env.MAILGUN_DOMAIN as string, mailgunMessage)
