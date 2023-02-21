@@ -15,6 +15,7 @@ export interface Profile {
  * @return success message if the sql statement was executed with no errors
 **/
  export async function insertProfile (profile: Profile): Promise<string>{
+     console.log(profile)
     const {profileActivationToken, profileEmail, profileHash, profilePhoneNumber, profileUsername}=profile
     await sql `INSERT INTO profile(profile_id, profile_activation_token, profile_email, profile_hash, profile_phone_number, profile_username) VALUES (gen_random_uuid(), ${profileActivationToken}, ${profileEmail}, ${profileHash}, ${profilePhoneNumber}, ${profileUsername})`
     return 'Profile successfully created'}
