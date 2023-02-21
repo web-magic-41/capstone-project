@@ -2,9 +2,9 @@ import{Request, Response} from "express";
 import Mailgun from "mailgun.js";
 import formData from'form-data'
 import Client from "mailgun.js/dist/lib/client";
-import {setActivationToken, setHash } from "../utils/interfaces/auth.utils";
-import { insertProfile, Profile } from "../utils/models/Profile";
-import { Status } from "../utils/interfaces/Status";
+import {setActivationToken, setHash } from "../../utils/interfaces/auth.utils";
+import { insertProfile, Profile } from "../../utils/models/Profile";
+import { Status } from "../../utils/interfaces/Status";
 
 export async function signupProfileController( request:Request, response: Response): Promise<Response|undefined> {
     try {
@@ -27,7 +27,6 @@ export async function signupProfileController( request:Request, response: Respon
             html: message
     }
 
-    // Ask Marty about Profile in line 29
     const profile: Profile = {
         profileId: null,
         profileActivationToken,
@@ -36,6 +35,7 @@ export async function signupProfileController( request:Request, response: Respon
         profileUsername,
         profilePhoneNumber
     }
+    console.log(profile)
     await insertProfile(profile)
 
     await mailgunClient.messages.create(process.env.MAILGUN_DOMAIN as string, mailgunMessage)
