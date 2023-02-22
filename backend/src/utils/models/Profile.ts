@@ -18,4 +18,9 @@ export interface Profile {
      console.log(profile)
     const {profileActivationToken, profileEmail, profileHash, profilePhoneNumber, profileUsername}=profile
     await sql `INSERT INTO profile(profile_id, profile_activation_token, profile_email, profile_hash, profile_phone_number, profile_username) VALUES (gen_random_uuid(), ${profileActivationToken}, ${profileEmail}, ${profileHash}, ${profilePhoneNumber}, ${profileUsername})`
-    return 'Profile successfully created'}
+    return 'Profile successfully created'
+ }
+
+export async function selectProfileByProfileEmail (profileEmail: string): Promise<Profile|null> {  const result = <Profile[]>await sql `SELECT profile_id, profile_activation_token, profile_email, profile_hash, profile_phone_number, profile_username FROM profile WHERE profile_email = ${profileEmail}`
+    return result?.length === 1 ? result[0] : null
+ }
