@@ -16,8 +16,7 @@ export async function signupProfileController( request:Request, response: Respon
         const profileHash = await setHash(profilePassword)
         const profileActivationToken = setActivationToken()
         const basePath: string = `$(request.protocol)://$(request.hostname)/$(request.originalUrl)/activation/${profileActivationToken}`
-        console.log('hello again')
-        const message = `<h2>Welcome to Burque MTG Finder.</h2>
+         const message = `<h2>Welcome to Burque MTG Finder.</h2>
         <p>In order to start posting listings of cards, you must confirm your account</p>
         <p><a href="${basePath}">${basePath}</a></p>
         `
