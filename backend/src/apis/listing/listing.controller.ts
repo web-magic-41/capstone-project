@@ -6,7 +6,7 @@ import {
     selectAllListings,
     selectListingByListingId,
 
-}
+} from "../../utils/models/Listing";
 
 
 export async function getAllListingsController(request: Request, response: Response): Promise<e.Response<any, Record<string, any>>> {

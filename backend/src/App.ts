@@ -5,7 +5,8 @@ import { indexRoute } from './apis/index/index.routes'
 import session from 'express-session'
 import { createClient } from 'redis'
 import RedisConnect from 'connect-redis'
-import {signupRoute} from "./apis/sign-up/signup.route";
+import {signupRoute} from './apis/sign-up/signup.route'
+import{signinRoute} from './apis/sign-in/signin.route'
 const redisClient = createClient({ legacyMode: true, socket: { host: process.env.REDIS_HOST } })
 redisClient.connect().catch(console.error)
 const RedisStore = RedisConnect(session)
@@ -47,6 +48,7 @@ export class App {
     private routes (): void {
         this.app.use('/apis', indexRoute)
         this.app.use('/apis/sign-up', signupRoute)
+        this.app.use('/apis/sign-in', signinRoute)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port

@@ -2,7 +2,7 @@ import {Response, Request} from "express";
 import {generateJwt, validatePassword } from "../../utils/interfaces/auth.utils";
 import { Profile, selectProfileByProfileEmail } from "../../utils/models/Profile";
 import { v4 as uuid } from 'uuid'
-export async function signInController (request: Request, response: Response): Promise<Response> {
+export async function signinController (request: Request, response: Response): Promise<Response> {
     try {
         const {profileEmail, profilePassword} = request.body
         const profile: Profile | null = await selectProfileByProfileEmail(profileEmail)
