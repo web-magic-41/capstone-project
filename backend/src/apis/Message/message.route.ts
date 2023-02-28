@@ -28,7 +28,8 @@ router.route('/messageDateTime').get(asyncValidatorController([
 
 
 
-router.route('')
+router.route('/')
+    .get()
 
 
 

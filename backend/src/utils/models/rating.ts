@@ -13,7 +13,7 @@ export async function insertRating (rating: Rating): Promise<string> {
     return "Rating created"
 }
 
-export async function updateRatingStarValue (rating: Rating): Promsie<string> {
+export async function updateRatingStarValue (rating: Rating): Promise<string> {
     const {ratingProfileId, ratedProfileId} = rating
     await sql `UPDATE rating SET ratingStarValue= ${ratingStarValue} WHERE ProfileId=${ProfileId}}`
     return "Rating star value updated"

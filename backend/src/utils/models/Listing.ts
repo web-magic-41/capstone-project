@@ -31,6 +31,6 @@ export async function selectListingByListingId (listingId:string): Promise<Listi
 
 
 
-export async function selectListingByListingProfileId (listingProfileId: string): Promise<Listing[]> {
+export async function selectListingsByListingProfileId (listingProfileId: string): Promise<Listing[]> {
     return <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img FROM listing WHERE listing_profile_id = ${listingProfileId}`
 }
