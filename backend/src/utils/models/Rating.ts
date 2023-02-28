@@ -29,3 +29,9 @@ export async function updateRatingComment (rating: Rating): Promise<string> {
     await sql`UPDATE rating SET rating_comment= ${ratingComment} WHERE rating_profile_id = ${ratingProfileId}}`
     return "Rating comment updated"
 }
+
+export async function selectRatingByRatingProfileId (rating: Rating): Promise<string> {
+    const {ratingComment, ratingStarValue} = rating
+    const result = <Rating[]> await sql 'SELECT rating_comment, rating_star_value FROM "rating" WHERE rating_profile_id= ${ratedProfileId}'
+    return result?.length === 1 ? result[0] : null
+}
