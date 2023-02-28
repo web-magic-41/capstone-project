@@ -52,10 +52,10 @@ create table message(
 );
 
 create table rating(
-    rating_profile uuid not null,
-    rated_profile uuid not null,
+    rating_profile_id uuid not null,
+    rated_profile_id uuid not null,
     rating_comment varchar(1000),
     rating_star_value varchar(5),
-    foreign key(rating_profile) references profile(profile_id),
-    foreign key(rated_profile) references profile(profile_id)
+    foreign key(rating_profile_id) references profile(profile_id),
+    foreign key(rated_profile_id) references profile(profile_id)
 );
