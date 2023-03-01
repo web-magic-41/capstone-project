@@ -1,13 +1,40 @@
 import {Request, Response, NextFunction} from "express";
 import {Status} from "../../utils/interfaces/Status";
 import {Profile} from "../../utils/models/Profile";
-import {insertMessage, Message, getMessagesByListingIdAndMessageProfileIds} from "../../utils/models/Message";
+import {insertMessage, Message, getMessagesByListingIdAndMessageProfileIds, getMessagesByProfileId} from "../../utils/models/Message";
+import {selectListingsByListingProfileId} from "../../utils/models/Listing";
 
 
+export async function getAllMessagesController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        const data = await selectAllMessages()
+        // return the response
+        const status: Status = { status: 200, message: null, data }
+        return response.json(status)
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: '',
+            data: []
+        })
+    }
+}
 
 
-
-
+export async function getMessagesByProfileIdController(request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const profile = request.session.profile as Profile
+        const profileIdFromSession = profile.profileId as string
+        const data = await getMessagesByProfileId(profileIdFromSession)
+        return response.json({status:200, message:null, data})
+    } catch(error) {
+        return response.json({
+            status:500,
+            message: '',
+            data: []
+        })
+    }
+}
 export async function  getMessagesByListingIdAndMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
     try{
         const{messageProfileIdOne,messageProfileIdTwo,messageListingId} = request.params

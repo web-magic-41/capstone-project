@@ -1,9 +1,14 @@
 import {Schema} from "express-validator";
 
 export const ratingValidator: Schema = {
+    raitingProfileId:{
+        isUUID:{
+            errorMessage: 'Please provide a valid ratingProfileId'
+        }
+    },
     ratedProfileId: {
         isUUID: {
-            errorMessage: 'Please provide a valid ratingProfileId'
+            errorMessage: 'Please provide a valid ratedProfileId'
         }
     },
     ratingComment: {

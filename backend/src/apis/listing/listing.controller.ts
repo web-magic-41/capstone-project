@@ -4,7 +4,7 @@ import {Response,Request, NextFunction} from "express";
 import {
     insertListing, Listing,
     selectAllListings,
-    selectListingByListingId, selectListingsByListingProfileId,
+    selectListingByListingId, selectListingsByListingProfileId, deleteListing, updateListing
 
 } from "../../utils/models/Listing";
 
@@ -26,7 +26,7 @@ export async function getAllListingsController(request: Request, response: Respo
 }
 
 
-export async function getListingsByProfileIdController (request: Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
+export async function getListingsByProfileIdController (request: Request, response: Response): Promise<Response<Status>> {
     try{
         const {listingProfileId} = request.params
         const data = await selectListingsByListingProfileId(listingProfileId)
@@ -64,7 +64,6 @@ export async function postListingController (request: Request, response: Respons
         const listingProfileId: string = profile.profileId as string
 
         const listing: Listing = {
-       listingId: null,
             listingCardId,
             listingProfileId,
             listingBackImg,
@@ -87,3 +86,69 @@ export async function postListingController (request: Request, response: Respons
         })
     }
     }
+export async function updateListingController (request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const {listingId, listingCardId, listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = request.body
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const profileIdFromSession: string = profile.profileId as string
+            let status : Status = {
+                status: 400,
+                data: null,
+                message: 'You are not allowed to perform this action.'
+        }
+        if (profileIdFromSession === listingProfileId) {
+
+            const listing: Listing = {
+                listingId,
+                listingCardId,
+                listingProfileId,
+                listingBackImg,
+                listingClaimed,
+                listingDate,
+                listingCardDescription,
+                listingCardDesiredValue,
+                listingFrontImg
+            }
+            const sqlResults = await updateListing(listing)
+             status = {
+                status: 200,
+                data: null,
+                message: sqlResults
+
+            }
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error updating listing, please try again later',
+            data: null
+        })
+    }
+}
+
+export async function deleteListingController (request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const {listingId} = request.params
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const profileOwner: string = profile.profileId as string
+
+
+        const sqlResults = await deleteListing(listingId, profileOwner)
+        const status : Status = {
+            status: 200,
+            data: null,
+            message: sqlResults
+
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error deleting listing, please try again later',
+            data: null
+        })
+    }
+}

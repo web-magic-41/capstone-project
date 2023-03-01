@@ -4,7 +4,7 @@ import {
     insertRating,
     Rating,
     selectRatingByRatedProfileId,
-    selectRatingsByRatingProfileId
+    selectRatingsByRatingProfileId, updateRating
 
 } from '../../utils/models/Rating'
 import {Profile} from "../../utils/models/Profile";
@@ -73,13 +73,27 @@ export async function updateRatingController (request: Request, response: Respon
         const {ratingProfileId, ratedProfileId, ratingComment, ratingStarValue} = request.body
         // @ts-ignore
         const profile: Profile = request.session.profile as Profile
-        const updateRating: string = profile.profileId as string
+        const profileIdFromSession: string = profile.profileId as string
+        let status: Status = {
+            status: 400,
+            data: null,
+            message: 'You are not allowed to perform this action'
+        }
+        if (profileIdFromSession === ratingProfileId) {
 
-        const rating: Rating = {
-            ratingProfileId,
-            ratedProfileId,
-            ratingComment,
-            ratingStarValue
+
+            const rating: Rating = {
+                ratingProfileId,
+                ratedProfileId,
+                ratingComment,
+                ratingStarValue
+            }
+            const sqlResults = await updateRating(rating)
+            const status: Status = {
+                status: 200,
+                data: null,
+                message: sqlResults
+            }
         }
         return response.json(status)
     }catch (error) {
