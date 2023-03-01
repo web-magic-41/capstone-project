@@ -14,27 +14,29 @@ export async function insertRating (rating: Rating): Promise<string> {
     // const ratingComment = rating.ratingComment
     // const ratingStarValue = rating.ratingStarValue
     const {ratingProfileId, ratedProfileId, ratingComment, ratingStarValue} = rating
-    await sql `INSERT INTO rating (rating_profile_id, rated_profile_id, rating_comment, rating_star_value) VALUES(${ratingProfileId}, ${ratedProfileId}, ${ratingComment}, ${ratingStarValue}`
+    await sql `
+        INSERT INTO rating (rating_profile_id, rated_profile_id, rating_comment, rating_star_value) 
+        VALUES(${ratingProfileId}, ${ratedProfileId}, ${ratingComment}, ${ratingStarValue})`
     return "Rating created"
 }
-
-export async function updateRatingStarValue (rating: Rating): Promise<string> {
-
-
-    const {ratingStarValue,ratedProfileId} = rating
-    await sql `UPDATE rating SET rating_star_value= ${ratingStarValue} WHERE rating_profile_id=${ratedProfileId}}`
-
+// updates the rating
+export async function updateRating (rating: Rating): Promise<string> {
+    const {ratingStarValue,ratedProfileId, ratingProfileId, ratingComment} = rating
+    await sql `UPDATE rating SET rating_star_value= ${ratingStarValue}, rating_comment= ${ratingComment} WHERE rating_profile_id=${ratingProfileId} and rated_profile_id= ${ratedProfileId}`
     return "Rating star value updated"
 }
-
-export async function updateRatingComment (rating: Rating): Promise<string> {
-    const {ratingComment, ratingProfileId} = rating
-    await sql`UPDATE rating SET rating_comment= ${ratingComment} WHERE rating_profile_id = ${ratingProfileId}}`
-    return "Rating comment updated"
+// Get the rating by the profile that is being rated
+export async function selectRatingByRatedProfileId (ratedProfileId: string): Promise<Rating[]> {
+    const result = await sql <Rating[]>`SELECT rated_profile_id, rating_profile_id, rating_comment, rating_star_value FROM rating WHERE rated_profile_id = ${ratedProfileId}`
+    return result
+}
+export async function selectRatingsByRatingProfileId(ratingProfileId: string): Promise<Rating[]> {
+    const result = await sql <Rating[]>`SELECT rating_profile_id, rated_profile_id, rating_comment, rating_star_value FROM rating WHERE rating_profile_id = ${ratingProfileId}`
+    return result
 }
 
-export async function selectRatingByRatingProfileId (rating: Rating): Promise<string> {
-    const {ratingComment, ratingStarValue} = rating
-    const result = <Rating[]> await sql 'SELECT rating_comment, rating_star_value FROM "rating" WHERE rating_profile_id= ${ratedProfileId}'
-    return result?.length === 1 ? result[0] : null
+export async function postRatingController(rating: Rating): Promise<string> {
+    const {ratingComment, ratingStarValue, ratingProfileId, ratedProfileId} = rating
+    await sql `INSERT INTO rating (rating_profile_id, rated_profile_id, rating_comment, rating_star_value) VALUES(${ratingProfileId}, ${ratedProfileId}, ${ratingComment}, ${ratingStarValue})`
+    return 'Rating posted'
 }

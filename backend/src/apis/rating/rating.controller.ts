@@ -1,11 +1,19 @@
 import {Status} from "../../utils/interfaces/Status";
 import { NextFunction, Request, Response } from 'express'
-import {selectRatingByRatingProfileId, selectRatingbyRatingProfileId} from '../../utils/models/Rating'
+import {
+    insertRating,
+    Rating,
+    selectRatingByRatedProfileId,
+    selectRatingsByRatingProfileId
 
-export async function getRatingByProfileId (request:Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
+} from '../../utils/models/Rating'
+import {Profile} from "../../utils/models/Profile";
+
+
+export async function getRatingByRatedProfileId (request:Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
     try {
-        const {ratingProfileId} = request.params
-        const data = await selectRatingByRatingProfileId()yRatingProfileId(ratingProfileId)
+        const {ratedProfileId} = request.params
+        const data = await selectRatingByRatedProfileId(ratedProfileId)
         return response.json({status: 200, message: null, data})
     } catch (error) {
         return response.json({
@@ -15,3 +23,74 @@ export async function getRatingByProfileId (request:Request, response: Response,
         })
     }
 }
+
+export async function getRatingByRatingsProfileId (request:Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
+    try {
+        const {ratingProfileId} = request.params
+        const data = await selectRatingsByRatingProfileId(ratingProfileId)
+        return response.json({status: 200, message: null, data})
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: "Couldn't retrieve rating try again later",
+            data: []
+        })
+    }
+}
+
+export async function postRatingController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+        const {ratingComment, ratingStarValue, ratedProfileId}= request.body
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const ratingProfileId: string = profile.profileId as string
+
+        const rating: Rating = {
+            ratingProfileId,
+            ratedProfileId,
+            ratingComment,
+            ratingStarValue
+        }
+        const result = await insertRating(rating)
+        console.log('test')
+        const status: Status = {
+            status: 200,
+            message: result,
+            data: null
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error creating rating please try again later',
+            data: null
+        })
+    }
+}
+
+export async function updateRatingController (request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const {ratingProfileId, ratedProfileId, ratingComment, ratingStarValue} = request.body
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const updateRating: string = profile.profileId as string
+
+        const rating: Rating = {
+            ratingProfileId,
+            ratedProfileId,
+            ratingComment,
+            ratingStarValue
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error updating rating, please try again later',
+            data: null
+        })
+    }
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> rating
