@@ -7,6 +7,7 @@ import {
 import {check, checkSchema} from "express-validator";
 import {listingValidator} from "./listing.validator";
 import {Router} from "express";
+import {isLoggedIn} from "../../utils/controllers/isLoggedIn.controller";
 
 const router = Router()
 router.route('/:listingId').get(asyncValidatorController([
