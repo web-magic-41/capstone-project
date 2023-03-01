@@ -38,6 +38,7 @@ export async function postMessage (request: Request, response: Response): Promis
         const{messageContent, messageListingId, messageReceivingProfileId} = request.body
         //as Profile add in if things break
         //figure out receiving profile id
+        // @ts-ignore
         const profile: Profile = request.session.profile as Profile
         const messageSendingProfileId: string =profile.profileId as string
         //generated from database
