@@ -1,6 +1,7 @@
 import {Router} from "express";
 import {asyncValidatorController} from "../../utils/controllers/async-validator.controller";
 import {check} from "express-validator";
+import { isLoggedIn } from '../../utils/controllers/isLoggedIn.controller'
 
 
 const router = Router()
