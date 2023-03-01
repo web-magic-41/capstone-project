@@ -2,6 +2,7 @@ import {asyncValidatorController} from "../../utils/controllers/async-validator.
 import {Router} from "express";
 import {check, checkSchema} from "express-validator";
 import {messageValidator} from "./message.vaildator";
+import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
 
 
 export const messageRoute: Router=Router()

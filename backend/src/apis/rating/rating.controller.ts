@@ -90,7 +90,3 @@ export async function updateRatingController (request: Request, response: Respon
         })
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> rating

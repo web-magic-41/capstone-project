@@ -2,7 +2,7 @@ import {asyncValidatorController} from "../../utils/controllers/async-validator.
 import {
     getAllListingsController,
     getListingByListingIdController,
-    getListingsByProfileIdController, postListing
+    getListingsByProfileIdController, postListingController
 } from "./listing.controller";
 import {check, checkSchema} from "express-validator";
 import {listingValidator} from "./listing.validator";
@@ -23,7 +23,7 @@ router.route('/listingProfileId/:listingProfileId').get(asyncValidatorController
 
 router.route('/')
     .get(getAllListingsController)
-    .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListing)
+    .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListingController)
 
 
 

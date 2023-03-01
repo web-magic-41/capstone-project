@@ -1,4 +1,5 @@
 import {sql} from "../database.utils";
+import {Rating} from "./Rating";
 
 
 export interface Listing {
@@ -32,7 +33,24 @@ export async function selectListingByListingId (listingId:string): Promise<Listi
 
 
 export async function selectListingsByListingProfileId (listingProfileId: string): Promise<Listing[]> {
-    return <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img FROM listing WHERE listing_profile_id = ${listingProfileId}`
+    return <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img 
+FROM listing 
+WHERE listing_profile_id = ${listingProfileId}`
 }
 
-//postListing needs to be added here
+export async function postListingController(listing: Listing): Promise<string> {
+    const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
+    await sql `INSERT INTO listing(listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img) VALUES(${listingId}, ${listingCardId}, ${listingProfileId}, ${listingBackImg}, ${listingCardDescription}, ${listingCardDesiredValue}, ${listingFrontImg})`
+    return 'Listing Posted'
+}
+
+export async function updateListing(listing: Listing): Promise<string> {
+    const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
+    await sql `UPDATE listing SET listing_id= ${listingId}, listing_card_id= ${listingCardId}, listing_profile_id=${listingProfileId}, listing_back_img=${listingBackImg}, listing_card_description=${listingCardDescription}, listing_card_desired_value=${listingCardDesiredValue}, listing_front_img=${listingFrontImg} WHERE listing_profile_id=${listingProfileId}`
+    return "Listing updated"
+}
+export async function deleteListing(listing:Listing): Promise<string>{
+    const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
+    await sql `DELETE FROM listing WHERE listing_id=${listingId}`
+    return "Listing deleted"
+}
