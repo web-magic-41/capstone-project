@@ -55,10 +55,11 @@ export async function getListingByListingIdController (request: Request, respons
     }
 }
 
-
-export async function postListing (request: Request, response: Response): Promise<Response<Status>> {
+//go over this again....
+export async function postListingController (request: Request, response: Response): Promise<Response<Status>> {
     try {
         const {listingCardId,listingBackImg, listingCardDescription, listingCardDesiredValue,listingFrontImg} = request.body
+        // @ts-ignore
         const profile:Profile = request.session.profile as Profile
         const listingProfileId: string = profile.profileId as string
 

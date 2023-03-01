@@ -1,6 +1,7 @@
 import { Schema } from "express-validator";
 
 export const messageValidator: Schema = {
+
     messageContent: {
         isLength: {
             errorMessage:'a message cannot be longer than 1000 characters',
@@ -9,8 +10,19 @@ export const messageValidator: Schema = {
         trim:true,
         escape:true
     },
-    //not sure if I need this
-    messageDate: {
-        toDate: true
+    messageListingId: {
+        isUUID: {
+            errorMessage: 'please provide a valid messageListingId'
+        }},
+    messageReceivingProfileId:{
+        isUUID: {
+            errorMessage: 'please provide a valid messageReceivingProfileId'
+        }},
+    messageSendingProfileId:{
+        isUUID: {
+            errorMessage: 'please provide a valid messageSendingProfileId'
+        }}
+
+
     }
-}
+

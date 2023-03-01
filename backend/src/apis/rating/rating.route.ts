@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 import {Router} from "express";
 import {asyncValidatorController} from "../../utils/controllers/async-validator.controller";
 import {check} from "express-validator";
@@ -32,4 +31,4 @@ router.route('/ratedProfileId/:ratedProfileId')
 
 
 export default router
->>>>>>> rating
+

@@ -28,6 +28,8 @@ create table listing(
     listing_card_id uuid not null,
     listing_profile_id uuid not null,
     listing_back_img varchar(255) not null,
+    listing_claimed boolean not null,
+    listing_date timestamptz not null,
     listing_card_description varchar(500),
     listing_card_desired_value varchar(16) not null,
     listing_front_img varchar(255) not null,
