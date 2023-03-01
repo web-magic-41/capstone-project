@@ -21,13 +21,22 @@ VALUES(gen_random_uuid(), ${messageListingId}, ${messageReceivingProfileId}, ${m
     return'Message created successfully'
 }
 //gets all messages from a given listing between two given users
-export async function getMessagesByListingIdAndMessageProfileIds (messageListingId: string, messageProfileIdOne:string, messageProfileIdTwo:string): Promise<Message[]>{
+//export async function getMessagesByListingIdAndMessageProfileIds (messageListingId: string, messageProfileIdOne:string, messageProfileIdTwo:string): Promise<Message[]>{
+//    return<Message[]> await sql`
+//            SELECT message_id, message_listing_id, message_receiving_profile_id, message_sending_profile_id, message_content, message_date_time
+//            FROM message
+//            WHERE message_listing_id = ${messageListingId}
+//              AND message_receiving_profile_id
+//                      IN (${messageProfileIdOne}, ${messageProfileIdTwo})
+//              AND message_sending_profile_id
+//                       IN (${messageProfileIdOne}, ${messageProfileIdTwo})`
+// }
+
+export async function getMessagesByProfileId (profileId:string): Promise<Message[]>{
     return<Message[]> await sql`
             SELECT message_id, message_listing_id, message_receiving_profile_id, message_sending_profile_id, message_content, message_date_time
             FROM message 
-            WHERE message_listing_id = ${messageListingId} 
-              AND message_reciving_profile_id 
-                      IN (${messageProfileIdOne}, ${messageProfileIdTwo}) 
-              AND message_sending_profile_id 
-                       IN (${messageProfileIdOne}, ${messageProfileIdTwo})`
-}
+            WHERE message_reciving_profile_id = ${profileId}
+            OR message_sending_profile_id =${profileId}`
+    }
+
