@@ -20,13 +20,21 @@ export async function insertRating (rating: Rating): Promise<string> {
 
 export async function updateRatingStarValue (rating: Rating): Promise<string> {
 
-    const {ratingStarValue} = rating
-    await sql `UPDATE rating SET ratingStarValue= ${ratingStarValue} WHERE ProfileId=${ProfileId}}`
+
+    const {ratingStarValue,ratedProfileId} = rating
+    await sql `UPDATE rating SET rating_star_value= ${ratingStarValue} WHERE rating_profile_id=${ratedProfileId}}`
+
     return "Rating star value updated"
 }
 
 export async function updateRatingComment (rating: Rating): Promise<string> {
-    const {ratingProfileId, ratedProfileId} = rating
-    await sql`UPDATE rating SET ratingComment= ${ratingComment} WHERE ProfileId = ${ProfileId}}`
+    const {ratingComment, ratingProfileId} = rating
+    await sql`UPDATE rating SET rating_comment= ${ratingComment} WHERE rating_profile_id = ${ratingProfileId}}`
     return "Rating comment updated"
+}
+
+export async function selectRatingByRatingProfileId (rating: Rating): Promise<string> {
+    const {ratingComment, ratingStarValue} = rating
+    const result = <Rating[]> await sql 'SELECT rating_comment, rating_star_value FROM "rating" WHERE rating_profile_id= ${ratedProfileId}'
+    return result?.length === 1 ? result[0] : null
 }
