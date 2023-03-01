@@ -10,10 +10,7 @@ const router = Router()
 router.route('/makeCard')
     .post(isLoggedIn, postCardController)
 
-// router.route('/ratingProfileId/:ratingProfileId')
-//     .get(asyncValidatorController([
-//         check('ratingProfileId', 'please provide a valid ratingProfileId').isUUID()
-//     ]), getRatingsbyProfileId)
+
 export default router
 /*
 * Make card
