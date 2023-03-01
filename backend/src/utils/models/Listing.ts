@@ -51,8 +51,8 @@ export async function updateListing(listing: Listing): Promise<string> {
     await sql `UPDATE listing SET listing_id= ${listingId}, listing_card_id= ${listingCardId}, listing_profile_id=${listingProfileId}, listing_back_img=${listingBackImg}, listing_claimed=${listingClaimed} , listing_date=${listingDate}, listing_card_description=${listingCardDescription}, listing_card_desired_value=${listingCardDesiredValue}, listing_front_img=${listingFrontImg} WHERE listing_profile_id=${listingProfileId}`
     return "Listing updated"
 }
-export async function deleteListing(listing:Listing): Promise<string>{
-    const {listingId, listingCardId, listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
-    await sql `DELETE FROM listing WHERE listing_id=${listingId}`
+export async function deleteListing(listingId: string, profileOwner: string): Promise<string>{
+    await sql `DELETE FROM listing WHERE listing_id=${listingId} AND listing_profile_id=${profileOwner}`
     return "Listing deleted"
 }
+//talk to george or look up: if function can't find error it will throw error or break. Need to fix: verify person who is trying to delete message is actual owner, or else people can delete other's listings, do it in sql query here or in controller.

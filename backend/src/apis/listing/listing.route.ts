@@ -1,5 +1,6 @@
 import {asyncValidatorController} from "../../utils/controllers/async-validator.controller";
 import {
+    deleteListingController,
     getAllListingsController,
     getListingByListingIdController, getListingsByProfileIdController, postListingController, updateListingController
 } from "./listing.controller";
@@ -27,6 +28,10 @@ router.route('/postListing')
 router.route('/updateListing')
     .post(isLoggedIn, asyncValidatorController(checkSchema(
         (listingValidator))), updateListingController)
+
+router.route('/deleteListing')
+    .delete(isLoggedIn, asyncValidatorController(checkSchema(
+        (listingValidator))), deleteListingController)
 
 
 export default router

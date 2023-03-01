@@ -33,6 +33,6 @@ router.route('/ratedProfileId/:ratedProfileId')
 
 router.route('/updateRating')
     .post(isLoggedIn, asyncValidatorController(checkSchema(
-        (listingValidator))), update
+        (listingValidator))), updateRatingController)
 export default router
 
