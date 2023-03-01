@@ -58,17 +58,20 @@ export async function getListingByListingIdController (request: Request, respons
 //go over this again....
 export async function postListingController (request: Request, response: Response): Promise<Response<Status>> {
     try {
-        const {listingCardId,listingBackImg, listingCardDescription, listingCardDesiredValue,listingFrontImg} = request.body
+        const {listingCardId,listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue,listingFrontImg,} = request.body
         // @ts-ignore
         const profile:Profile = request.session.profile as Profile
         const listingProfileId: string = profile.profileId as string
 
         const listing: Listing = {
+            listingId: null,
             listingCardId,
             listingProfileId,
             listingBackImg,
             listingCardDescription,
             listingCardDesiredValue,
+            listingClaimed: false,
+            listingDate: null,
             listingFrontImg
         }
         const result = await insertListing(listing)
