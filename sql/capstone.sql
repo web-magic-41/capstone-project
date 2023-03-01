@@ -55,7 +55,7 @@ create table rating(
     rating_profile_id uuid not null,
     rated_profile_id uuid not null,
     rating_comment varchar(1000),
-    rating_star_value varchar(5),
+    rating_star_value int,
     foreign key(rating_profile_id) references profile(profile_id),
     foreign key(rated_profile_id) references profile(profile_id)
 );
