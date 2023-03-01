@@ -19,10 +19,13 @@ export async function insertRating (rating: Rating): Promise<string> {
         VALUES(${ratingProfileId}, ${ratedProfileId}, ${ratingComment}, ${ratingStarValue})`
     return "Rating created"
 }
-// updates the rating
-export async function updateRating (rating: Rating): Promise<string> {
-    const {ratingStarValue,ratedProfileId, ratingProfileId, ratingComment} = rating
-    await sql `UPDATE rating SET rating_star_value= ${ratingStarValue}, rating_comment= ${ratingComment} WHERE rating_profile_id=${ratingProfileId} and rated_profile_id= ${ratedProfileId}`
+
+export async function updateRatingStarValue (rating: Rating): Promise<string> {
+
+
+    const {ratingStarValue,ratedProfileId} = rating
+    await sql `UPDATE rating SET rating_star_value= ${ratingStarValue} WHERE rating_profile_id=${ratedProfileId}}`
+
     return "Rating star value updated"
 }
 // Get the rating by the profile that is being rated
