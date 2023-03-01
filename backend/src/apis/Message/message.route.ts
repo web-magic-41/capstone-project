@@ -3,7 +3,10 @@ import {Router} from "express";
 import {check, checkSchema} from "express-validator";
 import {messageValidator} from "./message.vaildator";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
-import {postMessage} from "./message.controller";
+import {getMessagesByProfileIdController, postMessage} from "./message.controller";
+import {getAllListingsController, postListingController} from "../listing/listing.controller";
+import {listingValidator} from "../listing/listing.validator";
+import router from "../listing/listing.route";
 
 export const messageRoute: Router=Router()
 
@@ -14,17 +17,24 @@ export const messageRoute: Router=Router()
 
 
 
-messageRoute.route('/profileId/:profileId').get(asyncValidatorController([
-    check('messageReceivingProfileId', 'please provide a valid messageReceivingProfileId').isUUID()
-]),getMessageByMessageRecevingIdController)
+// messageRoute.route('/profileId/:profileId').get(asyncValidatorController([
+//     check('messageReceivingProfileId', 'please provide a valid messageReceivingProfileId').isUUID()
+// ]),getMessageByMessageRecevingIdController)
 
 
 
 //add is logged in
-messageRoute.route('/')
+messageRoute.route('/message')
     //first get combining these too routes. Writing a controller that is finding all of the messages that I either sent or receive
-    .get(getMessagesByMessageProfileId)
-    .post(isLoggedIn,asyncValidatorController(checkSchema(messageValidator))) ,postMessage)
+    .get(getMessagesByProfileIdController)
+    .post(isLoggedIn,asyncValidatorController(checkSchema(messageValidator)), postMessage)
+
+
+
+
+
+
+
 
 
 
@@ -52,21 +62,5 @@ messageRoute.route('/')
 //second controller is finding all of the messages that I sent or receive and that the listing id = x
 //copy and paste first controller and add listing id basically
 //be able to pass in the listing id from the request front end
-
-
-
-//add is logged in
-messageRoute.route('/')
-    //first get combining these too routes. Writing a controller that is finding all of the messages that I either sent or receive
-    .post(isLoggedIn,asyncValidatorController(checkSchema(messageValidator)) ,postMessage)
-
-
-
-
-
-
-
-
-
 
 
