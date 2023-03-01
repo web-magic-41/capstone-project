@@ -38,11 +38,11 @@ FROM listing
 WHERE listing_profile_id = ${listingProfileId}`
 }
 
-export async function postListingController(listing: Listing): Promise<string> {
-    const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
-    await sql `INSERT INTO listing(listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img) VALUES(${listingId}, ${listingCardId}, ${listingProfileId}, ${listingBackImg}, ${listingCardDescription}, ${listingCardDesiredValue}, ${listingFrontImg})`
-    return 'Listing Posted'
-}
+//export async function postListingController(listing: Listing): Promise<string> {
+ //   const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
+  //  await sql `INSERT INTO listing(listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_card_description, listing_card_desired_value, listing_front_img) VALUES(${listingId}, ${listingCardId}, ${listingProfileId}, ${listingBackImg}, ${listingCardDescription}, ${listingCardDesiredValue}, ${listingFrontImg})`
+ //   return 'Listing Posted'
+//}
 
 export async function updateListing(listing: Listing): Promise<string> {
     const {listingId, listingCardId, listingProfileId, listingBackImg, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing

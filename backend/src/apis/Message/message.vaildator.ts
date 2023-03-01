@@ -22,7 +22,7 @@ export const messageValidator: Schema = {
         isUUID: {
             errorMessage: 'please provide a valid messageSendingProfileId'
         }}
-    //not sure if I need this
+
 
     }
 
