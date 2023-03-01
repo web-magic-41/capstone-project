@@ -30,3 +30,5 @@ export async function postCardController (request: Request, response: Response):
         })
     }
 }
+
+export async function getCardByCardId (request:Request, response: Response,): Promise
