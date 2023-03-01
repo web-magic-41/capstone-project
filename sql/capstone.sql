@@ -17,7 +17,7 @@ create table profile(
 create table card(
     card_id uuid not null,
     card_description varchar(1000),
-    card_market_value varchar(7) not null,
+    card_market_value varchar(16) not null,
     card_name varchar(32) not null,
     primary key(card_id)
 
@@ -29,7 +29,7 @@ create table listing(
     listing_profile_id uuid not null,
     listing_back_img varchar(255) not null,
     listing_card_description varchar(500),
-    listing_card_desired_value varchar(7) not null,
+    listing_card_desired_value varchar(16) not null,
     listing_front_img varchar(255) not null,
     foreign key(listing_card_id) references card(card_id),
     foreign key(listing_profile_id) references profile(profile_id),
