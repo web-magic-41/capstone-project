@@ -1,7 +1,7 @@
 
 import {Router} from "express";
 import {asyncValidatorController} from "../../utils/controllers/async-validator.controller";
-import {check} from "express-validator";
+import {check, checkSchema} from "express-validator";
 import { isLoggedIn } from '../../utils/controllers/isLoggedIn.controller'
 import {
     getRatingByRatedProfileId,
@@ -9,6 +9,8 @@ import {
     postRatingController,
     updateRatingController
 } from "./rating.controller";
+import {listingValidator} from "../listing/listing.validator";
+import {updateListingController} from "../listing/listing.controller";
 
 
 
@@ -29,6 +31,8 @@ router.route('/ratedProfileId/:ratedProfileId')
         check('ratedProfileId', 'please provide a valid ratedProfileId').isUUID()
     ]), getRatingByRatedProfileId)
 
-
+router.route('/updateRating')
+    .post(isLoggedIn, asyncValidatorController(checkSchema(
+        (listingValidator))), update
 export default router
 

@@ -26,7 +26,7 @@ export async function getAllListingsController(request: Request, response: Respo
 }
 
 
-export async function getListingsByProfileIdController (request: Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
+export async function getListingsByProfileIdController (request: Request, response: Response): Promise<Response<Status>> {
     try{
         const {listingProfileId} = request.params
         const data = await selectListingsByListingProfileId(listingProfileId)
@@ -87,3 +87,72 @@ export async function postListingController (request: Request, response: Respons
         })
     }
     }
+export async function updateListingController (request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const {listingId, listingCardId, listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = request.body
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const updateListing: string = profile.profileId as string
+
+        const listing: Listing = {
+            listingId,
+            listingCardId,
+            listingProfileId,
+            listingBackImg,
+            listingClaimed,
+            listingDate,
+            listingCardDescription,
+            listingCardDesiredValue,
+            listingFrontImg
+        }
+        const sqlResults = updateListing(listing)
+        const status : Status = {
+            status: 200,
+            data: null,
+            message: sqlResults
+
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error updating listing, please try again later',
+            data: null
+        })
+    }
+}
+
+export async function deleteListingController (request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        const {listingId, listingCardId, listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = request.body
+        // @ts-ignore
+        const profile: Profile = request.session.profile as Profile
+        const deleteListing: string = profile.profileId as string
+
+        const listing: Listing = {
+            listingId,
+            listingCardId,
+            listingProfileId,
+            listingBackImg,
+            listingClaimed,
+            listingDate,
+            listingCardDescription,
+            listingCardDesiredValue,
+            listingFrontImg
+        }
+        const sqlResults = deleteListing(listing)
+        const status : Status = {
+            status: 200,
+            data: null,
+            message: sqlResults
+
+        }
+        return response.json(status)
+    }catch (error) {
+        return response.json({
+            status: 500,
+            message: 'Error deleting listing, please try again later',
+            data: null
+        })
+    }
+}

@@ -81,6 +81,11 @@ export async function updateRatingController (request: Request, response: Respon
             ratingComment,
             ratingStarValue
         }
+        const sqlResults = updateRating(rating)
+        const status : Status = {
+            status: 200,
+            data: null,
+            message: sqlResults}
         return response.json(status)
     }catch (error) {
         return response.json({
