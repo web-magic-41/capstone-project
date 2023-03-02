@@ -8,7 +8,7 @@ import {getAllListingsController, postListingController} from "../listing/listin
 import {listingValidator} from "../listing/listing.validator";
 import router from "../listing/listing.route";
 
-export const messageRoute: Router=Router()
+export const messageRoute=Router()
 
 
 
@@ -31,7 +31,7 @@ messageRoute.route('/message')
 
 
 
-
+export default messageRoute
 
 
 

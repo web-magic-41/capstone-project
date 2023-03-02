@@ -18,7 +18,7 @@ export interface Message {
 export async function insertMessage (message: Message): Promise<string> {
     const {messageSendingProfileId, messageContent, messageReceivingProfileId, messageListingId} = message
     await sql`INSERT INTO message(message_id, message_listing_id, message_receiving_profile_id, message_content,
-                                  message_sending_profile_id, message_data_time)
+                                  message_sending_profile_id, message_date_time)
               VALUES (gen_random_uuid(), ${messageListingId}, ${messageReceivingProfileId}, ${messageContent},
                       ${messageSendingProfileId}, NOW())`
     return 'Message created successfully'

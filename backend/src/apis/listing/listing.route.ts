@@ -10,30 +10,29 @@ import {Router} from "express";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
 
 
-
-const router = Router()
-router.route('/getListingByListingId').get(asyncValidatorController([
+const listingRouter = Router()
+listingRouter.route('/getListingByListingId').get(asyncValidatorController([
     check('listingId', 'please provide a valid listingId').isUUID()
 ]), getListingByListingIdController)
 
 
 
-router.route('/getListingByProfileId').get(asyncValidatorController([
+listingRouter.route('/getListingByProfileId').get(asyncValidatorController([
     check('listingProfileId', 'Please provide a valid listingProfileId').isUUID()]), getListingsByProfileIdController)
 
 
 
-router.route('/post')
+listingRouter.route('/post')
     .get(getAllListingsController)
     .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListingController)
 
-router.route('/updateListing')
+listingRouter.route('/updateListing')
     .post(isLoggedIn, asyncValidatorController(checkSchema(
         (listingValidator))), updateListingController)
 
-router.route('/deleteListing')
+listingRouter.route('/deleteListing')
     .delete(isLoggedIn, asyncValidatorController(checkSchema(
         (listingValidator))), deleteListingController)
 
 
-export default router
+export default listingRouter

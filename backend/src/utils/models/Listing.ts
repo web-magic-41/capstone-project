@@ -1,5 +1,5 @@
 import {sql} from "../database.utils";
-import {Rating} from "./Rating";
+
 
 
 export interface Listing {
@@ -17,7 +17,7 @@ export interface Listing {
 
 export async function insertListing (listing: Listing): Promise<string> {
     const { listingCardId,listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
-    await sql `INSERT INTO listing ( listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img) VALUES(gen_random_uuid(), ${listingCardId}, ${listingProfileId}, ${listingBackImg}, ${listingClaimed}, ${listingDate}, ${listingCardDescription}, ${listingCardDesiredValue}, ${listingFrontImg})`
+    await sql `INSERT INTO listing ( listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img) VALUES(gen_random_uuid(), ${listingCardId}, ${listingProfileId}, ${listingBackImg}, ${listingClaimed}, NOW(), ${listingCardDescription}, ${listingCardDesiredValue}, ${listingFrontImg})`
     return 'Listing created successfully'
 }
 
