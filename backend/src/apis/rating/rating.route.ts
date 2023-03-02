@@ -14,25 +14,25 @@ import {updateListingController} from "../listing/listing.controller";
 
 
 
-const router = Router()
+const ratingRouter = Router()
 //     Every new route is instantiated below. It will include the controller name and the type of action (get, post, delete, put, patch)
-router.route('/donthitthis').post(isLoggedIn, postRatingController)
+ratingRouter.route('/').post(isLoggedIn, postRatingController)
 
-router.route('/ratingProfileId/:ratingProfileId')
+ratingRouter.route('/rating/ratingByProfile')
     .get(asyncValidatorController([
         check('ratingProfileId', 'please provide a valid ratingProfileId').isUUID()
     ]), getRatingByRatingsProfileId)
 
-router.route('/createRating')
+ratingRouter.route('/createRating')
     .post(isLoggedIn, postRatingController)
 
-router.route('/ratedProfileId/:ratedProfileId')
+ratingRouter.route('/ratedProfileId/:ratedProfileId')
     .get(asyncValidatorController([
         check('ratedProfileId', 'please provide a valid ratedProfileId').isUUID()
     ]), getRatingByRatedProfileId)
 
-router.route('/updateRating')
+ratingRouter.route('/updateRating')
     .post(isLoggedIn, asyncValidatorController(checkSchema(
         (listingValidator))), updateRatingController)
-export default router
+export default ratingRouter
 

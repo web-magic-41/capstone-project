@@ -1,11 +1,6 @@
 import {Schema} from "express-validator";
 
 export const listingValidator: Schema = {
-    listingId: {
-        isUUID: {
-            errorMessage: 'Please provide a valid listingProfileId'
-        }
-    },
     listingCardId: {
         isUUID: {
             errorMessage: 'Please provide a valid listingCardId'

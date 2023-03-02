@@ -31,7 +31,7 @@ export async function getMessagesByProfileIdController(request: Request, respons
     } catch(error) {
         return response.json({
             status:500,
-            message: '',
+            message: 'Could not pull message',
             data: []
         })
     }
