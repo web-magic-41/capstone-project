@@ -51,6 +51,29 @@ export async function selectMessagesByReceivingProfileId(profileId: string): Pro
 
 //}
 
+// getAllMessages = () => {}
+// getAllMessagesByProfileId = (daniId) => ()
+// getAllMessagesByProfileIds = (daniId, eliseId) => {
+//     return <Message[]>await sql`
+//             SELECT message_id,
+//                    message_listing_id,
+//                    message_receiving_profile_id,
+//                    message_sending_profile_id,
+//                    message_content,
+//                    message_date_time
+//             FROM message
+//              WHERE message_receiving_profile_id
+//                      IN (${eliseId}, ${daniId})
+//              AND message_sending_profile_id
+//                       IN (${eliseId}, ${daniId})`
+// }
+
+
+
+
+
+
+
 
 
 
