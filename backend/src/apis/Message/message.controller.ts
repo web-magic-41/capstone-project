@@ -37,9 +37,13 @@ export async function getMessagesByProfileIdController(request: Request, respons
     }
 }
 
+
 //request is from the user and the response is from computer
 export async function postMessage (request: Request, response: Response): Promise<Response<Status>> {
     try {
+
+        console.log("MEOW")
+
         //request.body is everything the user is sending
         const{messageContent, messageListingId, messageReceivingProfileId} = request.body
         //as Profile add in if things break

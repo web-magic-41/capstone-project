@@ -52,7 +52,7 @@ export async function postRatingController (request: Request, response: Response
             ratingStarValue
         }
         const result = await insertRating(rating)
-        console.log('test')
+
         const status: Status = {
             status: 200,
             message: result,

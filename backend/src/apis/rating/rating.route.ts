@@ -18,7 +18,6 @@ const router = Router()
 //     Every new route is instantiated below. It will include the controller name and the type of action (get, post, delete, put, patch)
 router.route('/donthitthis').post(isLoggedIn, postRatingController)
 
-console.log('test')
 
 router.route('/ratingProfileId/:ratingProfileId')
     .get(asyncValidatorController([

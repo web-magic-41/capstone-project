@@ -15,7 +15,7 @@ export async function postCardController (request: Request, response: Response):
 
         }
         const result = await insertCard(card)
-        console.log('test')
+
         const status: Status = {
             status: 200,
             message: result,

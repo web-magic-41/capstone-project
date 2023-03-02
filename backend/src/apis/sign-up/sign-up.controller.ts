@@ -35,7 +35,7 @@ export async function signupProfileController( request:Request, response: Respon
         profileUsername,
         profilePhoneNumber
     }
-    console.log('testing 123')
+
     await insertProfile(profile)
 
     await mailgunClient.messages.create(process.env.MAILGUN_DOMAIN as string, mailgunMessage)
