@@ -16,6 +16,7 @@ listingRouter.route('/getListingByListingId').get(asyncValidatorController([
 ]), getListingByListingIdController)
 
 
+
 listingRouter.route('/getListingByProfileId').get(asyncValidatorController([
     check('listingProfileId', 'Please provide a valid listingProfileId').isUUID()]), getListingsByProfileIdController)
 
