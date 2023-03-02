@@ -7,7 +7,7 @@ import {checkSchema} from "express-validator";
 
 export const signupRoute: Router = Router()
 
-signupRoute.route('/')
+signupRoute.route('/signUp')
 .post(
     asyncValidatorController(checkSchema(signupValidator)),
     signupProfileController

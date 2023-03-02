@@ -3,5 +3,5 @@ import {signOutController} from "./sign-out.controller";
 
 export const signOutRoute: Router = Router()
 
-signOutRoute.route('/')
+signOutRoute.route('/signOut')
 .get(signOutController)

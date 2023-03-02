@@ -6,5 +6,5 @@ import {Router} from "express";
 
 export const SignInRouter: Router = Router()
 
-SignInRouter.route('/')
+SignInRouter.route('/signIn')
 .post(asyncValidatorController(checkSchema(signInValidator)), signInController)

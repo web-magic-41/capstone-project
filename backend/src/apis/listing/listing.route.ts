@@ -21,7 +21,7 @@ router.route('/getListingByProfileId').get(asyncValidatorController([
 
 
 
-router.route('/post')
+router.route('/postListing')
     .get(getAllListingsController)
     .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListingController)
 
