@@ -23,6 +23,8 @@ export async function insertMessage (message: Message): Promise<string> {
                       ${messageSendingProfileId}, NOW())`
     return 'Message created successfully'
 }
+
+//how to view messages the receiver has received
 export async function selectMessagesByReceivingProfileId(profileId: string): Promise<Message[]> {
         return <Message[]>await sql`
             SELECT message_id,
@@ -32,9 +34,30 @@ export async function selectMessagesByReceivingProfileId(profileId: string): Pro
                    message_content,
                    message_date_time
             FROM message
-            WHERE message_receiving_profile_id = ${profileId}`
+            WHERE message_receiving_profile_id = ${profileId} 
+            AND  message_sending_profile_id = ${sendingProfileId}`
 
     }
+// export async function selectMessagesByMessageId(messageId: string): Promise<Message[]> {
+//     return <Message[]>await sql`
+//         SELECT message_id,
+//                message_listing_id,
+//                message_receiving_profile_id,
+//                message_sending_profile_id,
+//                message_content,
+//                message_date_time
+//         FROM message
+//         WHERE message_receiving_profile_id = ${messageId}`
+
+//}
+
+
+
+
+
+
+
+
 
 //gets all messages from a given listing between two given users
 //export async function getMessagesByListingIdAndMessageProfileIds (messageListingId: string, messageProfileIdOne:string, messageProfileIdTwo:string): Promise<Message[]>{

@@ -3,7 +3,7 @@ import {Status} from "../../utils/interfaces/Status";
 import {Profile} from "../../utils/models/Profile";
 import {
     insertMessage,
-    Message,
+    Message, selectMessagesByMessageId,
     selectMessagesByReceivingProfileId
 } from "../../utils/models/Message";
 import {selectListingsByListingProfileId} from "../../utils/models/Listing";
@@ -83,6 +83,23 @@ export async function postMessage (request: Request, response: Response): Promis
     }
 }
 
+
+
+export async function getMessagesByMessageIdController(request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        // @ts-ignore
+        const profile = request.session.profile as Profile
+        const profileIdFromSession = profile.profileId as string
+        const data = await selectMessagesByMessageId(profileIdFromSession)
+        return response.json({status:200, message:null, data})
+    } catch(error) {
+        return response.json({
+            status:500,
+            message: 'Could not select message',
+            data: []
+        })
+    }
+}
 
 // export async function  getMessagesByListingIdAndMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
 //     try{

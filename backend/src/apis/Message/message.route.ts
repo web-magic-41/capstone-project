@@ -3,7 +3,11 @@ import {Router} from "express";
 import {check, checkSchema} from "express-validator";
 import {messageValidator} from "./message.vaildator";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
-import {getMessagesByReceivingProfileIdController, postMessage} from "./message.controller";
+import {
+    getMessagesByMessageIdController,
+    getMessagesByReceivingProfileIdController,
+    postMessage
+} from "./message.controller";
 
 
 export const messageRoute=Router()
@@ -25,6 +29,10 @@ messageRoute.route('/')
 
 messageRoute.route('/messageReceivingProfileId/:messageReceivingProfileId')
     .get(isLoggedIn,asyncValidatorController([check("messageReceivingProfileId","Please provide a valid UUID for message receiving profile id").isUUID()]), getMessagesByReceivingProfileIdController)
+
+messageRoute.route('/messageId')
+    .get(isLoggedIn,asyncValidatorController([check("messageId","Please provide a valid UUID for message profile id").isUUID()]), getMessagesByMessageIdController)
+
 
 
 
