@@ -3,10 +3,8 @@ import {Router} from "express";
 import {check, checkSchema} from "express-validator";
 import {messageValidator} from "./message.vaildator";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
-import {getMessagesByProfileIdController, postMessage} from "./message.controller";
-import {getAllListingsController, postListingController} from "../listing/listing.controller";
-import {listingValidator} from "../listing/listing.validator";
-import router from "../listing/listing.route";
+import {getMessagesByReceivingProfileIdController, postMessage} from "./message.controller";
+
 
 export const messageRoute=Router()
 
@@ -17,21 +15,18 @@ export const messageRoute=Router()
 
 
 
-// messageRoute.route('/profileId/:profileId').get(asyncValidatorController([
-//     check('messageReceivingProfileId', 'please provide a valid messageReceivingProfileId').isUUID()
-// ]),getMessageByMessageRecevingIdController)
 
 
 
-//add is logged in
-messageRoute.route('/message')
-    //first get combining these too routes. Writing a controller that is finding all of the messages that I either sent or receive
-    .get(getMessagesByProfileIdController)
+
+messageRoute.route('/')
+
     .post(isLoggedIn,asyncValidatorController(checkSchema(messageValidator)), postMessage)
 
+messageRoute.route('/messageReceivingProfileId/:messageReceivingProfileId')
+    .get(isLoggedIn,asyncValidatorController([check("messageReceivingProfileId","Please provide a valid UUID for message receiving profile id").isUUID()]), getMessagesByReceivingProfileIdController)
 
 
-export default messageRoute
 
 
 

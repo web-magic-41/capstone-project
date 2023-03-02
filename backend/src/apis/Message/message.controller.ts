@@ -1,7 +1,11 @@
 import {Request, Response, NextFunction} from "express";
 import {Status} from "../../utils/interfaces/Status";
 import {Profile} from "../../utils/models/Profile";
-import {insertMessage, Message, getMessagesByProfileId} from "../../utils/models/Message";
+import {
+    insertMessage,
+    Message,
+    selectMessagesByReceivingProfileId
+} from "../../utils/models/Message";
 import {selectListingsByListingProfileId} from "../../utils/models/Listing";
 
 
@@ -21,12 +25,12 @@ import {selectListingsByListingProfileId} from "../../utils/models/Listing";
 // }
 
 
-export async function getMessagesByProfileIdController(request: Request, response: Response): Promise<Response<Status>> {
+export async function getMessagesByReceivingProfileIdController(request: Request, response: Response): Promise<Response<Status>> {
     try{
         // @ts-ignore
         const profile = request.session.profile as Profile
         const profileIdFromSession = profile.profileId as string
-        const data = await getMessagesByProfileId(profileIdFromSession)
+        const data = await selectMessagesByReceivingProfileId(profileIdFromSession)
         return response.json({status:200, message:null, data})
     } catch(error) {
         return response.json({

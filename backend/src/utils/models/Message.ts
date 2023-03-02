@@ -23,7 +23,7 @@ export async function insertMessage (message: Message): Promise<string> {
                       ${messageSendingProfileId}, NOW())`
     return 'Message created successfully'
 }
-export async function getMessagesByProfileId(profileId: string): Promise<Message[]> {
+export async function selectMessagesByReceivingProfileId(profileId: string): Promise<Message[]> {
         return <Message[]>await sql`
             SELECT message_id,
                    message_listing_id,
@@ -32,8 +32,8 @@ export async function getMessagesByProfileId(profileId: string): Promise<Message
                    message_content,
                    message_date_time
             FROM message
-            WHERE message_reciving_profile_id = ${profileId}
-               OR message_sending_profile_id = ${profileId}`
+            WHERE message_receiving_profile_id = ${profileId}`
+
     }
 
 //gets all messages from a given listing between two given users
