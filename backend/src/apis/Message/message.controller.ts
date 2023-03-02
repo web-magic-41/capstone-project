@@ -1,28 +1,29 @@
 import {Request, Response, NextFunction} from "express";
 import {Status} from "../../utils/interfaces/Status";
 import {Profile} from "../../utils/models/Profile";
-import {insertMessage, Message, getMessagesByListingIdAndMessageProfileIds, getMessagesByProfileId} from "../../utils/models/Message";
+import {insertMessage, Message, getMessagesByProfileId} from "../../utils/models/Message";
 import {selectListingsByListingProfileId} from "../../utils/models/Listing";
 
 
-export async function getAllMessagesController (request: Request, response: Response): Promise<Response<Status>> {
-    try {
-        const data = await selectAllMessages()
-        // return the response
-        const status: Status = { status: 200, message: null, data }
-        return response.json(status)
-    } catch (error) {
-        return response.json({
-            status: 500,
-            message: '',
-            data: []
-        })
-    }
-}
+// export async function getAllMessagesController (request: Request, response: Response): Promise<Response<Status>> {
+//     try {
+//         const data = await selectAllMessages()
+//         // return the response
+//         const status: Status = { status: 200, message: null, data }
+//         return response.json(status)
+//     } catch (error) {
+//         return response.json({
+//             status: 500,
+//             message: '',
+//             data: []
+//         })
+//     }
+// }
 
 
 export async function getMessagesByProfileIdController(request: Request, response: Response): Promise<Response<Status>> {
     try{
+        // @ts-ignore
         const profile = request.session.profile as Profile
         const profileIdFromSession = profile.profileId as string
         const data = await getMessagesByProfileId(profileIdFromSession)
@@ -35,28 +36,6 @@ export async function getMessagesByProfileIdController(request: Request, respons
         })
     }
 }
-export async function  getMessagesByListingIdAndMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
-    try{
-        const{messageProfileIdOne,messageProfileIdTwo,messageListingId} = request.params
-        //write function in model.ts for selectmessages By message profile id
-        const data = await getMessagesByListingIdAndMessageProfileIds(messageListingId,messageProfileIdOne,messageProfileIdTwo)
-        return response.json({status:200, message:null, data})
-    }catch(error) {
-        return response.json({
-            status:500,
-            message: 'YOU SHALL NOT PASS',
-            data:[]
-        })
-    }
-}
-
-
- //    message_id uuid not null,
-//     message_listing_id uuid not null,
-//     message_receiving_profile_id uuid not null,
-//     message_sending_profile_id uuid not null,
-//     message_content varchar(1000) not null,
-//     message_date_time
 
 //request is from the user and the response is from computer
 export async function postMessage (request: Request, response: Response): Promise<Response<Status>> {
@@ -95,3 +74,67 @@ export async function postMessage (request: Request, response: Response): Promis
         })
     }
 }
+
+
+// export async function  getMessagesByListingIdAndMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
+//     try{
+//         const{messageProfileIdOne,messageProfileIdTwo,messageListingId} = request.params
+//         //write function in model.ts for selectmessages By message profile id
+//         const data = await getMessagesByListingIdAndMessageProfileIds(messageListingId,messageProfileIdOne,messageProfileIdTwo)
+//         return response.json({status:200, message:null, data})
+//     }catch(error) {
+//         return response.json({
+//             status:500,
+//             message: 'YOU SHALL NOT PASS',
+//             data:[]
+//         })
+//     }
+// }
+
+
+//    message_id uuid not null,
+//     message_listing_id uuid not null,
+//     message_receiving_profile_id uuid not null,
+//     message_sending_profile_id uuid not null,
+//     message_content varchar(1000) not null,
+//     message_date_time
+
+// export async function updateMessageController (request: Request, response: Response): Promise<Response<Status>> {
+//     try{
+//         const {messageId, messageListingId, messageReceivingProfileId, messageSendingProfileId, messageContent, messageDateTime}
+//             = request.body
+//         // @ts-ignore
+//         const profile: Profile = request.session.profile as Profile
+//         const profileIdFromSession: string = profile.profileId as string
+//         let status : Status = {
+//             status: 400,
+//             data: null,
+//             message: 'You are not allowed to perform this action.'
+//         }
+//         if (profileIdFromSession === messageSendingProfileId) {
+//
+//             const message: Message = {
+//                 messageId,
+//                 messageListingId,
+//                 messageReceivingProfileId,
+//                 messageSendingProfileId,
+//                 messageContent,
+//                 messageDateTime
+//             }
+//             const sqlResults = await updateMessage(message)
+//             status = {
+//                 status: 200,
+//                 data: null,
+//                 message: sqlResults
+//
+//             }
+//         }
+//         return response.json(status)
+//     }catch (error) {
+//         return response.json({
+//             status: 500,
+//             message: 'Error updating message, please try again later',
+//             data: null
+//         })
+//     }
+// }
