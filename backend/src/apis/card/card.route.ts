@@ -17,10 +17,7 @@ router.route('/cardId/:cardId')
         check('cardId', 'please provide a valid cardId').isUUID()
     ]), getCardByCardId)
 
-// router.route('/ratingProfileId/:ratingProfileId')
-//     .get(asyncValidatorController([
-//         check('ratingProfileId', 'please provide a valid ratingProfileId').isUUID()
-//     ]), getRatingsbyProfileId)
+
 export default router
 /*
 * Make card

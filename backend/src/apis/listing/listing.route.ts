@@ -10,10 +10,12 @@ import {Router} from "express";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
 
 
+
 const router = Router()
 router.route('/getListingByListingId').get(asyncValidatorController([
     check('listingId', 'please provide a valid listingId').isUUID()
 ]), getListingByListingIdController)
+
 
 
 router.route('/getListingByProfileId').get(asyncValidatorController([
@@ -21,7 +23,7 @@ router.route('/getListingByProfileId').get(asyncValidatorController([
 
 
 
-router.route('/postListing')
+router.route('/post')
     .get(getAllListingsController)
     .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListingController)
 
