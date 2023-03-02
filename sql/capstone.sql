@@ -41,12 +41,10 @@ create table listing(
 
 create table message(
     message_id uuid not null,
-    message_listing_id uuid not null,
     message_receiving_profile_id uuid not null,
     message_sending_profile_id uuid not null,
     message_content varchar(1000) not null,
     message_date_time timestamptz not null,
-    foreign key(message_listing_id) references listing(listing_id),
     foreign key(message_receiving_profile_id) references profile(profile_id),
     foreign key(message_sending_profile_id) references profile(profile_id),
     primary key(message_id)

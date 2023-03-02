@@ -2,6 +2,7 @@ import {Request, Response, NextFunction} from "express";
 import {Status} from "../../utils/interfaces/Status";
 import {Profile} from "../../utils/models/Profile";
 import {
+    getMessagesByMessageProfileIds,
     insertMessage,
     Message, selectMessagesByMessageId,
     selectMessagesByReceivingProfileId
@@ -49,7 +50,7 @@ export async function postMessage (request: Request, response: Response): Promis
         console.log("MEOW")
 
         //request.body is everything the user is sending
-        const{messageContent, messageListingId, messageReceivingProfileId} = request.body
+        const{messageContent, messageReceivingProfileId} = request.body
         //as Profile add in if things break
         //figure out receiving profile id
         // @ts-ignore
@@ -60,8 +61,6 @@ export async function postMessage (request: Request, response: Response): Promis
 
         const message: Message ={
             messageId: null,
-            //how to get message listing id/receiving id from the request
-            messageListingId,
             messageReceivingProfileId,
             messageSendingProfileId,
             messageContent,
@@ -101,20 +100,20 @@ export async function getMessagesByMessageIdController(request: Request, respons
     }
 }
 
-// export async function  getMessagesByListingIdAndMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
-//     try{
-//         const{messageProfileIdOne,messageProfileIdTwo,messageListingId} = request.params
-//         //write function in model.ts for selectmessages By message profile id
-//         const data = await getMessagesByListingIdAndMessageProfileIds(messageListingId,messageProfileIdOne,messageProfileIdTwo)
-//         return response.json({status:200, message:null, data})
-//     }catch(error) {
-//         return response.json({
-//             status:500,
-//             message: 'YOU SHALL NOT PASS',
-//             data:[]
-//         })
-//     }
-// }
+export async function  getMessagesByMessageProfileIdsController (request: Request, response: Response): Promise<Response<Status>>{
+    try{
+        const{messageProfileIdOne,messageProfileIdTwo} = request.params
+        //write function in model.ts for selectmessages By message profile id
+        const data = await getMessagesByMessageProfileIds(messageProfileIdOne,messageProfileIdTwo)
+        return response.json({status:200, message:null, data})
+    }catch(error) {
+        return response.json({
+            status:500,
+            message: 'YOU SHALL NOT PASS',
+            data:[]
+        })
+    }
+}
 
 
 //    message_id uuid not null,

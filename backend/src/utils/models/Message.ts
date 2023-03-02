@@ -1,10 +1,7 @@
 import {sql} from "../database.utils";
-import {Listing} from "./Listing";
 export interface Message {
 
     messageId:string|null
-
-    messageListingId:string
 
     messageReceivingProfileId:string
 
@@ -16,28 +13,39 @@ export interface Message {
 }
 
 export async function insertMessage (message: Message): Promise<string> {
-    const {messageSendingProfileId, messageContent, messageReceivingProfileId, messageListingId} = message
-    await sql`INSERT INTO message(message_id, message_listing_id, message_receiving_profile_id, message_content,
+    const {messageSendingProfileId, messageContent, messageReceivingProfileId} = message
+    await sql`INSERT INTO message(message_id, message_receiving_profile_id, message_content,
                                   message_sending_profile_id, message_date_time)
-              VALUES (gen_random_uuid(), ${messageListingId}, ${messageReceivingProfileId}, ${messageContent},
+              VALUES (gen_random_uuid(), ${messageReceivingProfileId}, ${messageContent},
                       ${messageSendingProfileId}, NOW())`
     return 'Message created successfully'
 }
 
-//how to view messages the receiver has received
-export async function selectMessagesByReceivingProfileId(profileId: string): Promise<Message[]> {
-        return <Message[]>await sql`
-            SELECT message_id,
-                   message_listing_id,
-                   message_receiving_profile_id,
-                   message_sending_profile_id,
-                   message_content,
-                   message_date_time
-            FROM message
-            WHERE message_receiving_profile_id = ${profileId} 
-            AND  message_sending_profile_id = ${sendingProfileId}`
 
-    }
+// gets all messages from a given listing between two given users
+export async function getMessagesByMessageProfileIds (messageProfileIdOne:string, messageProfileIdTwo:string): Promise<Message[]>{
+        return<Message[]> await sql`
+           SELECT message_id, message_listing_id, message_receiving_profile_id, message_sending_profile_id, message_content, message_date_time
+           FROM message
+         WHERE message_receiving_profile_id
+                     IN (${messageProfileIdOne}, ${messageProfileIdTwo})
+             AND message_sending_profile_id
+                      IN (${messageProfileIdOne}, ${messageProfileIdTwo})`
+}
+
+//how to view messages the receiver has received
+// export async function selectMessagesByReceivingProfileId(profileId: string): Promise<Message[]> {
+//         return <Message[]>await sql`
+//             SELECT message_id,
+//                    message_receiving_profile_id,
+//                    message_sending_profile_id,
+//                    message_content,
+//                    message_date_time
+//             FROM message
+//             WHERE message_receiving_profile_id = ${profileId}
+//             AND  message_sending_profile_id = ${sendingProfileId}`
+//
+//     }
 // export async function selectMessagesByMessageId(messageId: string): Promise<Message[]> {
 //     return <Message[]>await sql`
 //         SELECT message_id,
@@ -50,13 +58,12 @@ export async function selectMessagesByReceivingProfileId(profileId: string): Pro
 //         WHERE message_receiving_profile_id = ${messageId}`
 
 //}
-
+//
 // getAllMessages = () => {}
 // getAllMessagesByProfileId = (daniId) => ()
 // getAllMessagesByProfileIds = (daniId, eliseId) => {
 //     return <Message[]>await sql`
 //             SELECT message_id,
-//                    message_listing_id,
 //                    message_receiving_profile_id,
 //                    message_sending_profile_id,
 //                    message_content,
@@ -67,32 +74,32 @@ export async function selectMessagesByReceivingProfileId(profileId: string): Pro
 //              AND message_sending_profile_id
 //                       IN (${eliseId}, ${daniId})`
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//gets all messages from a given listing between two given users
-//export async function getMessagesByListingIdAndMessageProfileIds (messageListingId: string, messageProfileIdOne:string, messageProfileIdTwo:string): Promise<Message[]>{
-//    return<Message[]> await sql`
-//            SELECT message_id, message_listing_id, message_receiving_profile_id, message_sending_profile_id, message_content, message_date_time
-//            FROM message
-//            WHERE message_listing_id = ${messageListingId}
-//              AND message_receiving_profile_id
-//                      IN (${messageProfileIdOne}, ${messageProfileIdTwo})
-//              AND message_sending_profile_id
-//                       IN (${messageProfileIdOne}, ${messageProfileIdTwo})`
+//
+//
+// export async function getAllMessagesByProfileId(profileId: string): Promise<Message[]> {
+//     return <Message[]>await sql`
+//             SELECT message_id,
+//                    message_receiving_profile_id,
+//                    message_sending_profile_id,
+//                    message_content,
+//                    message_date_time
+//             FROM message
+//             WHERE message_receiving_profile_id = ${profileId}
+//             AND  message_sending_profile_id = ${profileId}`
+//
 // }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export async function updateMessage (message: Message): Promise<string> {
 //     const { messageId,

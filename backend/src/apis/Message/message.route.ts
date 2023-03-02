@@ -4,10 +4,11 @@ import {check, checkSchema} from "express-validator";
 import {messageValidator} from "./message.vaildator";
 import { isLoggedIn } from "../../utils/controllers/isLoggedIn.controller";
 import {
-    getMessagesByMessageIdController,
+    getMessagesByMessageIdController, getMessagesByMessageProfileIdsController,
     getMessagesByReceivingProfileIdController,
     postMessage
 } from "./message.controller";
+import {getMessagesByMessageProfileIds} from "../../utils/models/Message";
 
 
 export const messageRoute=Router()
@@ -34,7 +35,10 @@ messageRoute.route('/messageId')
     .get(isLoggedIn,asyncValidatorController([check("messageId","Please provide a valid UUID for message profile id").isUUID()]), getMessagesByMessageIdController)
 
 
-
+messageRoute.route('/messageBetweenUsers/:messageProfileIdOne/:messageProfileIdTwo').get(asyncValidatorController([
+   check('messageProfileIdOne', 'please provide a valid messageProfileIdOne').isUUID(),
+    check('messageProfileIdTwo', 'please provide a valid messageProfileIdTwo').isUUID()
+]),getMessagesByMessageProfileIdsController)
 
 
 
@@ -57,10 +61,7 @@ messageRoute.route('/messageId')
 
 
 
-//are messages tied to listing or just sent to see the messages
-//messageRoute.route('/messageSendingProfileId/:messageSendingProfileId').get(asyncValidatorController([
-//    check('messageSendingProfileId', 'please provide a valid messageSendingProfileId').isUUID()
-//]),getMessageByMessageSendingIdController)
+
 
 //second controller is finding all of the messages that I sent or receive and that the listing id = x
 //copy and paste first controller and add listing id basically
