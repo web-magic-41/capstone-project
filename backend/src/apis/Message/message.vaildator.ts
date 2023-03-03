@@ -10,10 +10,6 @@ export const messageValidator: Schema = {
         trim:true,
         escape:true
     },
-    messageListingId: {
-        isUUID: {
-            errorMessage: 'please provide a valid messageListingId'
-        }},
     messageReceivingProfileId:{
         isUUID: {
             errorMessage: 'please provide a valid messageReceivingProfileId'

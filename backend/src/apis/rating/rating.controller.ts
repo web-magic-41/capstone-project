@@ -1,6 +1,7 @@
 import {Status} from "../../utils/interfaces/Status";
 import { NextFunction, Request, Response } from 'express'
 import {
+    getRatingByRatingId,
     insertRating,
     Rating,
     selectRatingByRatedProfileId,
@@ -8,6 +9,7 @@ import {
 
 } from '../../utils/models/Rating'
 import {Profile} from "../../utils/models/Profile";
+import {getMessageByMessageId} from "../../utils/models/Message";
 
 
 export async function getRatingByRatedProfileId (request:Request, response: Response, nextFunction: NextFunction): Promise<Response<Status>> {
@@ -94,6 +96,7 @@ export async function updateRatingController (request: Request, response: Respon
                 data: null,
                 message: sqlResults
             }
+            return response.json(status)
         }
         return response.json(status)
     }catch (error) {
@@ -101,6 +104,21 @@ export async function updateRatingController (request: Request, response: Respon
             status: 500,
             message: 'Error updating rating, please try again later',
             data: null
+        })
+    }
+}
+
+export async function getRatingsByRatingIdController(request: Request, response: Response): Promise<Response<Status>> {
+    try{
+        // @ts-ignore
+        const {ratingId}= request.params
+        const data = await getRatingByRatingId(ratingId)
+        return response.json({status:200, message:null, data})
+    } catch(error) {
+        return response.json({
+            status:500,
+            message: 'Could not select rating',
+            data: []
         })
     }
 }

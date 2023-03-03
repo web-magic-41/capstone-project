@@ -1,4 +1,5 @@
 import {sql} from "../database.utils";
+import {Message} from "./Message";
 
 export interface Rating {
     ratingProfileId: string
@@ -35,8 +36,10 @@ export async function selectRatingsByRatingProfileId(ratingProfileId: string): P
     return result
 }
 
-export async function postRatingController(rating: Rating): Promise<string> {
-    const {ratingComment, ratingStarValue, ratingProfileId, ratedProfileId} = rating
-    await sql `INSERT INTO rating (rating_profile_id, rated_profile_id, rating_comment, rating_star_value) VALUES(${ratingProfileId}, ${ratedProfileId}, ${ratingComment}, ${ratingStarValue})`
-    return 'Rating posted'
+export async function getRatingByRatingId (ratingId: string): Promise<Message[]>{
+    const result =  await sql <Message[]>`
+           SELECT rating_profile_id, rated_profile_id, rating_comment, rating_star_value
+           FROM rating WHERE rating_id = ${ratingId}`
+    return result?.length===1 ?result[0]: null
+
 }

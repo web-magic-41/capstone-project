@@ -5,7 +5,7 @@ import {check, checkSchema} from "express-validator";
 import { isLoggedIn } from '../../utils/controllers/isLoggedIn.controller'
 import {
     getRatingByRatedProfileId,
-    getRatingByRatingsProfileId,
+    getRatingByRatingsProfileId, getRatingsByRatingIdController,
     postRatingController,
     updateRatingController
 } from "./rating.controller";
@@ -20,22 +20,24 @@ const ratingRouter = Router()
 ratingRouter.route('/').post(isLoggedIn, postRatingController)
 
 
-ratingRouter.route('/ratingByProfile')
+ratingRouter.route('/ratingProfileId/:ratingProfileId')
 
     .get(asyncValidatorController([
         check('ratingProfileId', 'please provide a valid ratingProfileId').isUUID()
     ]), getRatingByRatingsProfileId)
 
-ratingRouter.route('/createRating')
+ratingRouter.route('/')
     .post(isLoggedIn, postRatingController)
 
-ratingRouter.route('/ratedProfileId')
+ratingRouter.route('/ratedProfileId/:ratedProfileId')
     .get(asyncValidatorController([
         check('ratedProfileId', 'please provide a valid ratedProfileId').isUUID()
     ]), getRatingByRatedProfileId)
 
-ratingRouter.route('/updateRating')
-    .post(isLoggedIn, asyncValidatorController(checkSchema(
+ratingRouter.route('/:ratingProfileId')
+    .put(isLoggedIn, asyncValidatorController(checkSchema(
         (ratingValidator))), updateRatingController)
+    .get(asyncValidatorController(checkSchema(
+        (ratingValidator))), getRatingsByRatingIdController)
 export default ratingRouter
 
