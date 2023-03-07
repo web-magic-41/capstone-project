@@ -1,13 +1,15 @@
 import React from "react"
-import {Button, Card} from "react-bootstrap";
-import {BasicExample} from "./BasicExample.jsx";
+import {Button, Image} from "react-bootstrap";
 
 export function Home() {
     return (
         <>
-            <BasicExample/>
-            <h1>Home</h1>
-
+            <section className="home-image">
+                <Image src="" alt=""/>
+                <p>Insert intro text here</p>
+                <Button variant="dark">Login</Button>
+                <Button variant="dark">Sign Up</Button>
+            </section>
         </>
     )
 }
