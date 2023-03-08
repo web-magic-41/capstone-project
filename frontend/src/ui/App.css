@@ -1,3 +1,4 @@
+
 #listingForm{
     width: 60%;
 }
@@ -21,3 +22,13 @@
 .justify-form {
     justify-content: left;
 }
+
+.home-image{
+    background: url("");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
