@@ -3,12 +3,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import { FourOhFour } from './FourOhFour'
 import {Home} from "./Home.jsx";
-
 import {ListACard} from "./listACard.jsx";
-
 import {Navigation} from "./Navigation.jsx";
 import {Results} from "./Results.jsx";
-
+import {SignUp} from "./SignUp";
 
 
 export function App() {
@@ -20,10 +18,9 @@ export function App() {
                     <Route  path='/' element={<Home/>} />
                     <Route path='/Home' element={<Home/>}/>
                     <Route path={"*"} element={<FourOhFour />} />
-
                     <Route path={"listACard"} element={<ListACard/>} />
-
                     <Route path='/results' element={<Results/>}/>
+                    <Route path={"sign-up"} element={<SignUp/>}/>
 
                 </Routes>
             </BrowserRouter>
