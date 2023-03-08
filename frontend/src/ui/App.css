@@ -40,3 +40,19 @@
     height: 100vh;
 }
 
+#username {
+    color: white;
+}
+
+#star {
+    height: 5vh;
+}
+
+#profile {
+    background: url(./flesh.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+}
+

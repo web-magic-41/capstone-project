@@ -7,6 +7,7 @@ import {ListACard} from "./listACard.jsx";
 import {Navigation} from "./Navigation.jsx";
 import {Results} from "./Results.jsx";
 import {SignUp} from "./SignUp";
+import {Profile} from "./Profile";
 
 
 export function App() {
@@ -21,6 +22,7 @@ export function App() {
                     <Route path={"listACard"} element={<ListACard/>} />
                     <Route path='/results' element={<Results/>}/>
                     <Route path={"sign-up"} element={<SignUp/>}/>
+                    <Route path={"Profile"} element={<Profile/>}/>
 
                 </Routes>
             </BrowserRouter>
