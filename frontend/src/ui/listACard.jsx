@@ -6,7 +6,7 @@ export function ListACard() {
     return (
         <>
             <div id={"listACard"}>
-            <Container className={"justify-content-center"}>
+            <Container className={"justify-content-center mt-3"}>
                 <Row>
                     <Col id={"cat"} md={2} className={"mx-auto mb-3 d-block text-center"}>
                         <Image src={cat} fluid={true} alt="placeHolder"/>
