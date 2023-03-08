@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import { FourOhFour } from './FourOhFour'
 import {Home} from "./Home.jsx";
+import {ListACard} from "./listACard.jsx";
 
 
 export function App() {
@@ -12,6 +13,7 @@ export function App() {
                 <Routes>
                     <Route  path='/' element={<Home />} />
                     <Route path={"*"} element={<FourOhFour />} />
+                    <Route path={"listACard"} element={<ListACard/>} />
                 </Routes>
             </BrowserRouter>
         </>

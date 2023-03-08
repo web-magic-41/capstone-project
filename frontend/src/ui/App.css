@@ -1,0 +1,23 @@
+#listingForm{
+    width: 60%;
+}
+
+
+
+#listACard {
+    background: url(./castle.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+}
+
+@media (max-width:768px) {
+    .justify-form {
+        justify-content: center !important;
+    }
+}
+
+.justify-form {
+    justify-content: left;
+}
