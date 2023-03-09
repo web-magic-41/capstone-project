@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import { FourOhFour } from './FourOhFour'
 import {Home} from "./Home.jsx";
-
+import {Browse} from './Browse'
+import {SignIn} from "./SignIn";
 
 export function App() {
     return (
@@ -12,6 +13,8 @@ export function App() {
                 <Routes>
                     <Route  path='/' element={<Home />} />
                     <Route path={"*"} element={<FourOhFour />} />
+                    <Route path='/browse' element={<Browse />}/>
+                    <Route path='/signin' element={<SignIn />}/>
                 </Routes>
             </BrowserRouter>
         </>
