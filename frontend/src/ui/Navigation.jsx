@@ -1,18 +1,19 @@
 import React from "react";
 import {Container, Nav, Navbar} from "react-bootstrap";
+import mtgfinderlogowhite from "../Images/mtgfinderlogowhite.png"
 
 export function Navigation() {
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" className="vh-10 navbarfont">
                 <Container fluid>
                     <Navbar sticky="top" />
                     <Navbar.Brand href="Home">Home</Navbar.Brand>
                     <img
                         alt="INSERT ALT HERE"
-                        src="INSERT IMAGE HERE"
-                        width="30"
-                        height="30"
+                        src={mtgfinderlogowhite}
+                        width="100"
+                        height="75"
                         className="d-inline-block align-top"
                     />{' '}
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
