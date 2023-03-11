@@ -7,6 +7,7 @@ import {Browse} from './Browse'
 import {SignIn} from "./SignIn";
 import {Navigation} from "./Navigation.jsx";
 import {Results} from "./Results.jsx";
+import {Message} from "./Message.jsx";
 
 export function App() {
     return (
@@ -20,6 +21,7 @@ export function App() {
                     <Route path='/browse' element={<Browse />}/>
                     <Route path='/signin' element={<SignIn />}/>
                     <Route path='/results' element={<Results/>}/>
+                    <Route path='/message' element={<Message/>}/>
                 </Routes>
             </BrowserRouter>
         </>

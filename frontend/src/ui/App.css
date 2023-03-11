@@ -1,6 +1,6 @@
 
-.search-bar{
-    width: 300px;
+.browse-search-bar{
+  width: 300px;
 }
 #search{
 position: relative;
@@ -56,7 +56,18 @@ position: relative;
 }
 
 .browse-background {
-    background-color: lightgray;
     background-size: cover;
+    background: lightgray url(../Images/shimmerdragon.jpg) no-repeat center;
     height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.message{
+    position: relative;
+    left: 60vh;
+}
+
