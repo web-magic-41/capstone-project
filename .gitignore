@@ -25,4 +25,8 @@ project.env
 */yarn-debug.log*
 */yarn-error.log*
 
+
 frontend/setupProxy.js
+
+/backend/dataDownloader/*
+
