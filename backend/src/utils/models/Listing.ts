@@ -23,7 +23,7 @@ export async function insertListing (listing: Listing): Promise<string> {
 
 //double check for line 23
 export async function selectAllListings(): Promise<Listing[]> {
-    return<Listing[]> await sql`SELECT listing_id, listing_card_id, listing_card_name,listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img FROM listing ORDER BY listing_date DESC`
+    return<Listing[]> await sql`SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img FROM listing ORDER BY listing_date DESC`
 }
 
 
