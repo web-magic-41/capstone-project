@@ -18,7 +18,7 @@ create table card(
     card_id uuid not null,
     card_description varchar(1000),
     card_market_value varchar(16) not null,
-    card_name varchar(32) not null,
+    card_name varchar(32) not null unique,
     primary key(card_id)
 
 );

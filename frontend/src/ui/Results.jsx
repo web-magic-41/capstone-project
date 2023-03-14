@@ -1,20 +1,41 @@
 import React from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import {ListingCard} from "./ListingCard.jsx";
+import {fetchAllListings} from "../store/listings.js";
+import {selectProfile} from "../store/profile.js";
+import { useDispatch, useSelector } from 'react-redux'
 
-const test = [
-    {name: 'black lotus',
-    price: '10000',
-    image: 'image'},
-    {name: 'sword to plowshares',
-        price: '10',
-        image: 'image1'},
-    {name: 'edgar markov',
-        price: '80',
-        image: 'image2'}
-];
 
-export function Results(props) {
+export function Results() {
+
+
+
+    const listings = useSelector(state => {
+        if(state?.listings.constructor.name === "Object") {
+            return Object.values(state.listings)
+        } else return []
+    })
+
+    const profile = useSelector(state => {
+        if(state?.profile?.constructor.name === "Object") {
+            return Object.values(state.profile)
+        } else return {}
+    })
+
+    const dispatch = useDispatch()
+
+    const initialEffect = () => {
+        dispatch(fetchAllListings())
+        dispatch(selectProfile())
+    }
+
+    React.useEffect(initialEffect, [])
+
+    console.log("listing slice", listings)
+    console.log("Profile slice", profile)
+
+
+
     return (
         <><div className="browse-background">
             <section className="home-image">
@@ -22,8 +43,9 @@ export function Results(props) {
                     <Row>
                         <Col>
                             {
-                                test.map(x=>{
-                                   return <ListingCard listing={x}/>})
+
+                                listings.map(listing=>  <ListingCard listing={listing}/>)
+
                              }
 
                         </Col>

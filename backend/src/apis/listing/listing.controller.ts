@@ -19,7 +19,7 @@ export async function getAllListingsController(request: Request, response: Respo
     } catch(error) {
         return response.json({
             status:500,
-        message: '',
+        message: 'error pulling listings',
         data: []
         })
     }
@@ -34,7 +34,7 @@ export async function getListingsByProfileIdController (request: Request, respon
     } catch(error) {
         return response.json({
             status:500,
-            message: '',
+            message: 'error pulling listings',
             data: []
         })
     }
@@ -49,7 +49,7 @@ export async function getListingByListingIdController (request: Request, respons
     } catch(error){
         return response.json({
             status:500,
-            message: '',
+            message: 'error pulling listings',
             data:null
         })
     }
@@ -58,7 +58,7 @@ export async function getListingByListingIdController (request: Request, respons
 //go over this again....
 export async function postListingController (request: Request, response: Response): Promise<Response<Status>> {
     try {
-        const {listingCardId,listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue,listingFrontImg,} = request.body
+        const {listingCardId,listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue,listingFrontImg} = request.body
         // @ts-ignore
         const profile:Profile = request.session.profile as Profile
         const listingProfileId: string = profile.profileId as string
@@ -84,7 +84,7 @@ export async function postListingController (request: Request, response: Respons
     } catch (error) {
         return response.json({
             status:500,
-            message: 'Error Pulling listing Data',
+            message: 'Error Posting listing',
             data: null
         })
     }
