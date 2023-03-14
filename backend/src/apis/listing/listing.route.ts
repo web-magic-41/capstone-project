@@ -22,7 +22,7 @@ listingRouter.route('/getListingByProfileId').get(asyncValidatorController([
 
 
 
-listingRouter.route('/post')
+listingRouter.route('/')
     .get(getAllListingsController)
     .post(isLoggedIn,asyncValidatorController(checkSchema((listingValidator))), postListingController)
 

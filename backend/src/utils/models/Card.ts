@@ -9,10 +9,10 @@ export interface Card {
 }
 
 export async function insertCard (card: Card): Promise<string> {
-    const {cardId, cardName, cardDescription, cardMarketValue} = card
+    const { cardName, cardDescription, cardMarketValue} = card
     await sql `
         INSERT INTO card (card_id, card_name, card_description, card_market_value) 
-        VALUES(${cardId}, ${cardName}, ${cardDescription}, ${cardMarketValue})`
+        VALUES(gen_random_uuid(), ${cardName}, ${cardDescription}, ${cardMarketValue})`
     return "Card created"
 }
 
