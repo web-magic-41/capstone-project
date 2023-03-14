@@ -1,6 +1,9 @@
 import React from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
 import {ListingCard} from "./ListingCard.jsx";
+import {fetchAllListings} from "../store/listings.js";
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const test = [
     {name: 'black lotus',
@@ -15,6 +18,23 @@ const test = [
 ];
 
 export function Results() {
+    const listings = useSelector(state => {
+        if(state?.listings.constructor.name === "Object") {
+            return Object.values(state.listings)
+        } else []
+    })
+
+    const dispatch = useDispatch()
+
+    const initialEffect = () => {
+        dispatch(fetchAllListings())
+    }
+
+    React.useEffect(initialEffect, [])
+
+    console.log("listing slice", listings)
+console.log("test", test)
+
     return (
         <><div className="browse-background">
             <section className="home-image">
@@ -22,8 +42,7 @@ export function Results() {
                     <Row>
                         <Col>
                             {
-                                test?.map(x=>{ // noinspection JSValidateTypes
-                                   return <ListingCard txt={x}/>})
+                                listings.map(listing=>  <ListingCard listing={listing}/>)
                              }
 
                         </Col>

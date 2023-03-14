@@ -8,11 +8,16 @@ import {Navigation} from "./Navigation.jsx";
 import {Results} from "./Results.jsx";
 import {SignUp} from "./SignUp";
 import {Profile} from "./Profile";
+import {Provider} from "react-redux";
+import React from "react";
 
 
-export function App() {
+export function App({store}) {
     return (
+
         <>
+
+            <Provider store={store}>
             <BrowserRouter>
                 <Navigation/>
                 <Routes>
@@ -26,6 +31,7 @@ export function App() {
 
                 </Routes>
             </BrowserRouter>
+            </Provider>
         </>
     )
 }
