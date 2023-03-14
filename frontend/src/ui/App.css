@@ -57,7 +57,7 @@ position: relative;
 
 .browse-background {
     background-size: cover;
-    background: lightgray url(../Images/shimmerdragon.jpg) no-repeat center;
+    background: lightgray url(../Images/483550.jpg) no-repeat center;
     height: 100%;
     width: 100%;
     position: fixed;
@@ -71,3 +71,49 @@ position: relative;
     left: 60vh;
 }
 
+.button-browse{
+/*position: relative;*/
+/*right: 29vw;*/
+
+}
+
+.signin-background {
+    background-size: cover;
+    background: lightgray url(../Images/Mtg-Wallpapers-HD-For-Desktop.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signin-search-bar{
+    width: 300px;
+}
+
+
+.message-background {
+    background-size: cover;
+    background: lightgray url(../Images/483501.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.message-history-placeholder{
+    background: #00000066;
+    height: 50vh;
+    width: 50vh;
+    border-radius: 8%;
+    margin: 1em;
+}
+
+.message-history-placeholder-text{
+   padding: 2.5em 2.5em;
+    font-weight: bolder;
+    color: #fff;
+}
