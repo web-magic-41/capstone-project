@@ -14,7 +14,7 @@ const test = [
         image: 'image2'}
 ];
 
-export function Results() {
+export function Results(props) {
     return (
         <><div className="browse-background">
             <section className="home-image">
@@ -22,8 +22,8 @@ export function Results() {
                     <Row>
                         <Col>
                             {
-                                test?.map(x=>{ // noinspection JSValidateTypes
-                                   return <ListingCard txt={x}/>})
+                                test.map(x=>{
+                                   return <ListingCard listing={x}/>})
                              }
 
                         </Col>
