@@ -16,6 +16,7 @@ import listingRoute from './apis/listing/listing.route'
 import { messageRoute } from './apis/Message/message.route'
 import listingRouter from "./apis/listing/listing.route";
 import ratingRouter from "./apis/rating/rating.route";
+import {ProfileRoute} from "./apis/Profile/profile.route";
 
 const redisClient = createClient({ legacyMode: true, socket: { host: process.env.REDIS_HOST } })
 redisClient.connect().catch(console.error)
@@ -64,6 +65,7 @@ export class App {
         this.app.use('/apis/listing', listingRouter)
         this.app.use('/apis/message', messageRoute)
         this.app.use('/apis/card', cardRoute)
+        this.app.use('/apis/profile', ProfileRoute)
 
     }
 
