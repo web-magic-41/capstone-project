@@ -1,30 +1,46 @@
 import Button from 'react-bootstrap/Button';
-import {Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
-import React from "react";
-import BackgroundImg from "../Images/jorge-jacinto-swamp-wasteland-by-jorgejacinto.jpg"
+import {FloatingLabel, Form, Row} from "react-bootstrap";
+import React, {useEffect} from "react";
+import {fetchAllListings} from "../store/listings.js";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export function Browse() {
+    const listings = useSelector(state => state.listings ? state.listings : []);
+
+    const dispatch = useDispatch();
+    const effects = () => {
+        dispatch(fetchAllListings());
+    };
+    useEffect(effects, [dispatch]);
+
     return (
         <>
-            <div className={`browse-background d-flex align-items-center`}>
+            <div className={`browse-background`}>
+
+                <div className={`d-flex align-items-center`}>
+                    <div className={''}>
+                        <FloatingLabel className={'mb-3'} controlId="floatingPassword" label="Search">
+                            <Form.Control className={'browse-search-bar'} type="Search Criteria"
+                                          placeholder="Search Criteria"/>
+                        </FloatingLabel>
+
+                    </div>
+
+                    <div className={``}>
+                        <Button onClick={() => {
+                            dispatch(fetchAllListings())
+                        }
+                        } className={`button-browse`} md={4} variant="dark" size="md">Search</Button>
+                    </div>
 
 
-                        <div className={''}>
-                            <FloatingLabel className={'mb-3'} controlId="floatingPassword" label="Search">
-                                <Form.Control className={'browse-search-bar'} type="Search Criteria"
-                                              placeholder="Search Criteria"/>
-                            </FloatingLabel>
-
-                        </div>
-
-                        <div className={``}>
-                            <Button className={`button-browse`} md={4} variant="dark" size="md">Search</Button>
-                        </div>
-
-
-
-
+                </div>
+                <div>
+                    {listings.map(listing => <>
+                    <span>{listing.name}
+                </span></>)}
+                </div>
             </div>
         </>
     )
