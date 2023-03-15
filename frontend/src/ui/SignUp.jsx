@@ -23,6 +23,21 @@ export function SignUp() {
                                     <Form.Control type="Password" placeholder="Password"/>
                                 </FloatingLabel>
                             </Form.Group>
+                            <Form.Group className={"mb-3"}>
+                                <FloatingLabel controlId="Confirm Password" label="Confirm Password">
+                                    <Form.Control type="Confirm Password" placeholder="Confirm Password"/>
+                                </FloatingLabel>
+                            </Form.Group>
+                            <Form.Group className={"mb-3"}>
+                                <FloatingLabel controlId="Email" label="Email">
+                                    <Form.Control type="Email" placeholder="Email"/>
+                                </FloatingLabel>
+                            </Form.Group>
+                            <Form.Group className={"mb-3"}>
+                                <FloatingLabel controlId="Phone Number" label="Phone Number">
+                                    <Form.Control type="Phone Number" placeholder="Phone Number"/>
+                                </FloatingLabel>
+                            </Form.Group>
                             <Button className={"gy-3"} id={"button2"} variant="dark" size="lg">
                                 Login
                             </Button>
