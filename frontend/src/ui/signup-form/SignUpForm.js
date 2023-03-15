@@ -2,9 +2,9 @@ import {Button,Form, FormControl, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Formik} from "formik";
 import * as Yup from "yup";
-import {httpConfig} from "../componets/httpConfig.js";
-import {DisplayError} from "../componets/DisplayError.js"
-import {DisplayStatus} from "../componets/DisplayStatus.js";
+import {httpConfig} from "../componets/HttpConfig.js";
+import {DisplayError} from "../componets/DisplayError.jsx"
+import {DisplayStatus} from "../componets/DisplayStatus.jsx";
 
 
 export const SignUpForm = () => {
@@ -99,7 +99,7 @@ function SignUpFormContent(props) {
                             name="profileEmail"
                             type="text"
                             value={values.profileEmail}
-                            placeholder=""
+                            placeholder="your@email.you"
                             onChange={handleChange}
                             onBlur={handleBlur}
                         />
