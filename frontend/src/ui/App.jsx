@@ -11,12 +11,17 @@ import {Message} from "./Message.jsx";
 import {ListACard} from "./listACard.jsx";
 import {SignUp} from "./SignUp";
 import {Profile} from "./Profile";
+import {Provider} from "react-redux";
+import React from "react";
 
 
 
-export function App() {
+export function App({store}) {
     return (
+
         <>
+
+            <Provider store={store}>
             <BrowserRouter>
                 <Navigation/>
                 <Routes>
@@ -33,6 +38,7 @@ export function App() {
                     <Route path={"Profile"} element={<Profile/>}/>
                 </Routes>
             </BrowserRouter>
+            </Provider>
         </>
     )
 }

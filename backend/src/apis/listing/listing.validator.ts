@@ -40,7 +40,7 @@ export const listingValidator: Schema = {
     },
     listingFrontImg: {
         isLength: {
-            errorMessage: 'ImageURL must be smaller than 255 characters)',
+            errorMessage: 'ImageURL must be smaller than 255 characters',
             options: {max: 255}
         },
         trim: true,

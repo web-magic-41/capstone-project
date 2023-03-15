@@ -28,14 +28,14 @@ export async function selectAllListings(): Promise<Listing[]> {
 
 
 export async function selectListingByListingId (listingId:string): Promise<Listing|null> {
-    const result = <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img FROM listing WHERE listing_id =${listingId}`
+    const result = <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_card_name,listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img FROM listing WHERE listing_id =${listingId}`
     return result?.length === 1 ? result[0] : null
 }
 
 
 
 export async function selectListingsByListingProfileId (listingProfileId: string): Promise<Listing[]> {
-    return <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img 
+    return <Listing[]> await sql `SELECT listing_id, listing_card_id, listing_card_name, listing_profile_id, listing_back_img, listing_claimed, listing_date, listing_card_description, listing_card_desired_value, listing_front_img 
 FROM listing 
 WHERE listing_profile_id = ${listingProfileId}`
 }
@@ -48,7 +48,7 @@ WHERE listing_profile_id = ${listingProfileId}`
 
 export async function updateListing(listing: Listing): Promise<string> {
     const {listingId, listingCardId, listingProfileId, listingBackImg, listingClaimed, listingDate, listingCardDescription, listingCardDesiredValue, listingFrontImg} = listing
-    await sql `UPDATE listing SET listing_id= ${listingId}, listing_card_id= ${listingCardId}, listing_profile_id=${listingProfileId}, listing_back_img=${listingBackImg}, listing_claimed=${listingClaimed} , listing_date=${listingDate}, listing_card_description=${listingCardDescription}, listing_card_desired_value=${listingCardDesiredValue}, listing_front_img=${listingFrontImg} WHERE listing_profile_id=${listingProfileId}`
+    await sql `UPDATE listing SET listing_id= ${listingId}, listing_card_id= ${listingCardId},listing_profile_id=${listingProfileId}, listing_back_img=${listingBackImg}, listing_claimed=${listingClaimed}, listing_date=${listingDate}, listing_card_description=${listingCardDescription}, listing_card_desired_value=${listingCardDesiredValue}, listing_front_img=${listingFrontImg} WHERE listing_profile_id=${listingProfileId}`
     return "Listing updated"
 }
 export async function deleteListing(listingId: string, profileOwner: string): Promise<string>{

@@ -10,6 +10,12 @@ export interface Profile {
 
 }
 
+
+export interface PartialProfile {
+    profileId: string
+    profileUsername: string
+}
+
 /** Function to insert profile object into postgres database
 * @param profile Profile object that will be inserted into the database
  * @return success message if the sql statement was executed with no errors
@@ -23,4 +29,10 @@ export interface Profile {
 
 export async function selectProfileByProfileEmail (profileEmail: string): Promise<Profile|null> {  const result = <Profile[]>await sql `SELECT profile_id, profile_activation_token, profile_email, profile_hash, profile_phone_number, profile_username FROM profile WHERE profile_email = ${profileEmail}`
     return result?.length === 1 ? result[0] : null
+ }
+
+
+
+ export async function selectPartialProfileByProfileId (profileId: string): Promise<PartialProfile|null> {  const result = <PartialProfile[]>await sql `SELECT profile_id, profile_username FROM profile WHERE profile_id = ${profileId}`
+     return result?.length === 1 ? result[0] : null
  }
