@@ -10,9 +10,11 @@ import {Formik} from "formik";
 import {DisplayError} from "./componets/DisplayError.jsx";
 import {DisplayStatus} from "./componets/DisplayStatus.jsx";
 import {FormDebugger} from "./componets/FormDebugger.jsx";
+import {Profile} from "./Profile.jsx";
+import {redirect, useNavigate} from "react-router-dom";
 
 export function SignIn() {
-
+const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const validator = Yup.object().shape({
@@ -40,9 +42,15 @@ export function SignIn() {
                 if (reply.status === 200 && reply.headers["authorization"]) {
                     window.localStorage.removeItem("authorization");
                     window.localStorage.setItem("authorization", reply.headers["authorization"]);
-                    resetForm();
+
                     let jwtToken = jwtDecode(reply.headers["authorization"])
                     dispatch(getAuth(jwtToken))
+
+                    setTimeout(() => {
+                    navigate("/profile")
+                    }, 1000);
+
+
                 }
                 setStatus({message, type});
             });

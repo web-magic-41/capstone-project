@@ -4,22 +4,26 @@ import React from "react";
 import * as Yup from "yup";
 import {httpConfig} from "./componets/HttpConfig.js";
 import {Formik} from "formik";
+import {DisplayStatus} from "./componets/DisplayStatus.jsx";
+import {DisplayError} from "./componets/DisplayError.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 export function SignUp() {
+    const navigate = useNavigate()
     const signUp = {
-        profileEmail: "Email",
-        profileAtHandle: "User Name",
-        profilePassword: "Password",
-        profilePasswordConfirm: "Confirm Password",
-        profilePhone: "Phone Number",
+        profileEmail: "",
+        profileAtHandle: "",
+        profilePassword: "",
+        profilePasswordConfirm: "",
+        profilePhone: "",
     }
 
     const validator = Yup.object().shape({
         profileEmail: Yup.string()
             .email("email must be a valid email")
             .required('email is required'),
-        profileAtHandle: Yup.string()
+        profileUsername: Yup.string()
             .required("profile handle is required"),
         profilePassword: Yup.string()
             .required("Password is required")
@@ -38,7 +42,10 @@ export function SignUp() {
                     let {message, type} = reply;
 
                     if (reply.status === 200) {
-                        resetForm();
+                        setTimeout(() => {
+                            navigate("/profile")
+                        }, 1000);
+                       // resetForm();
                     }
                     setStatus({message, type});
                 }
@@ -80,40 +87,51 @@ export function SignUp() {
                 <Row>
                     <Col className={"d-flex justify-content-center"}>
                         <Form id={"listingForm"}>
+
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Username">
-                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profileEmail} type="UserName" placeholder="UwU"/>
+                                <FloatingLabel controlId="profileUsername" label="Username">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profileUsername} type="text" placeholder="UwU"/>
                                 </FloatingLabel>
+                                <DisplayError errors={errors} touched={touched} field={"profileUsername"}/>
                             </Form.Group>
+
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel controlId="Password" label="Password">
-                                    <Form.Control type="Password" placeholder="Password"/>
+                                <FloatingLabel controlId="profilePassword" label="Password">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profilePassword} type="password" placeholder="Password"/>
                                 </FloatingLabel>
+                                <DisplayError errors={errors} touched={touched} field={"profilePassword"}/>
                             </Form.Group>
+
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel controlId="Confirm Password" label="Confirm Password">
-                                    <Form.Control type="Confirm Password" placeholder="Confirm Password"/>
+                                <FloatingLabel controlId="profilePasswordConfirm" label="Confirm Password">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profilePasswordConfirm}type="password" placeholder="Confirm Password"/>
                                 </FloatingLabel>
+                                <DisplayError errors={errors} touched={touched} field={"profilePasswordConfirm"}/>
                             </Form.Group>
+
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel controlId="Email" label="Email">
-                                    <Form.Control type="Email" placeholder="Email"/>
+                                <FloatingLabel controlId="profileEmail" label="Email">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profileEmail} type="email" placeholder="Email"/>
                                 </FloatingLabel>
+                                <DisplayError errors={errors} touched={touched} field={"profileEmail"}/>
                             </Form.Group>
+
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel controlId="Phone Number" label="Phone Number">
-                                    <Form.Control type="Phone Number" placeholder="Phone Number"/>
+                                <FloatingLabel controlId="profilePhone" label="Phone Number">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profilePhone}type="tel" placeholder="Phone Number"/>
                                 </FloatingLabel>
+                                <DisplayError errors={errors} touched={touched} field={"profilePhone"}/>
                             </Form.Group>
+
                             <Button className={"gy-3"} id={"button2"} variant="dark" size="lg">
                                 Login
                             </Button>
+                            <DisplayStatus status={status} />
                         </Form>
                     </Col>
                 </Row>
             </Container>
+
             </div>
     )
         }
