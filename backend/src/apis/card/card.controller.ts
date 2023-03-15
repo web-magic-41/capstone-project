@@ -35,6 +35,7 @@ export async function getCardByCardId (request:Request, response: Response,): Pr
     try {
         const {cardId} = request.params
         const data = await selectCardByCardId(cardId)
+        console.log(data)
         return response.json({status: 200, message: null, data})
     } catch (error) {
         return response.json({
