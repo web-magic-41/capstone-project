@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import * as Yup from "yup";
 import {httpConfig} from "../componets/HttpConfig.js";
 import jwtDecode from "jwt-decode";
-import {getAuth} from "../componets/Auth.js";
+import {getAuth} from "../../store/auth.js";
 import {Formik} from "formik";
 import {Form, FormControl, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

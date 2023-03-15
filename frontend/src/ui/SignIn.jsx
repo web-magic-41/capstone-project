@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import * as Yup from "yup";
 import {httpConfig} from "./componets/HttpConfig.js";
 import jwtDecode from "jwt-decode";
-import {getAuth} from "./componets/Auth.js";
+import {getAuth} from "../store/auth.js";
 import {Formik} from "formik";
 import {DisplayError} from "./componets/DisplayError.jsx";
 import {DisplayStatus} from "./componets/DisplayStatus.jsx";
@@ -75,25 +75,25 @@ function SigninFormContent(props) {
 
                 <Form onSubmit={handleSubmit}>
 
-                    <FloatingLabel className={'mb-3'} controlId="floatingPassword" label="UserName">
+                    <FloatingLabel className={'mb-3'} controlId="profileEmail" label="Email">
                         <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profileEmail}
                                       name={"profileEmail"} className={'signin-search-bar'} type="text"/>
                     </FloatingLabel>
                     <DisplayError errors={errors} touched={touched} field={"profileEmail"}/>
 
-                    <FloatingLabel className={'mb-4'} controlId="floatingPassword" label="Password">
+                    <FloatingLabel className={'mb-4'} controlId="profilePassword" label="Password">
                         <Form.Control className={'signin-search-bar'} onChange={handleChange} onBlur={handleBlur}
                                       name="profilePassword" value={values.profilePassword} type="password"/>
                     </FloatingLabel>
                     <DisplayError errors={errors} touched={touched} field={"profilePassword"}/>
-                    <Button className={'align-self-end'} id={"login"} md={4} variant="dark"
+                    <Button className={'align-self-end'} type={"submit"} id={"login"} md={4} variant="dark"
                             size="md">Login</Button>
                 </Form>
             </div>
             <div className="pt-3">
                 <DisplayStatus status={status} />
             </div>
-            <FormDebugger {...props}/>
+      
         </div>
     )
 }
