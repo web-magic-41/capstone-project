@@ -29,13 +29,13 @@ export function App({store}) {
                     <Route path='/Home' element={<Home/>}/>
                     <Route path={"*"} element={<FourOhFour />} />
                     <Route path='/browse' element={<Browse />}/>
-                    <Route path='/signin' element={<SignIn />}/>
+                    <Route path='/sign-in' element={<SignIn />}/>
                     <Route path='/results' element={<Results/>}/>
-                    <Route path='/message' element={<Message/>}/>
+                    <Route path='/messages' element={<Message/>}/>
                     <Route path={"listACard"} element={<ListACard/>} />
                     <Route path='/results' element={<Results/>}/>
                     <Route path={"sign-up"} element={<SignUp/>}/>
-                    <Route path={"Profile"} element={<Profile/>}/>
+                    <Route path={"profile"} element={<Profile/>}/>
                 </Routes>
             </BrowserRouter>
             </Provider>

@@ -4,8 +4,8 @@ import {fetchProfileByProfileId} from "./profiles.js";
 import {fetchCardByCardId} from "./cards.js";
 
 const listingSlice = createSlice ({
-    name: 'listing',
-    initialState: {},
+    name: 'listings',
+    initialState: [],
     reducers: {
         setInitialListings: (listings, action) => {
             return action.payload

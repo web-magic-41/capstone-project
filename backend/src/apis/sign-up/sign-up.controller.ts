@@ -48,6 +48,14 @@ export async function signupProfileController( request:Request, response: Respon
 
     return response.json(status)
 } catch (error: any) {
+        if(error.message === "Forbidden"){
+            const status: Status = {
+                status: 200,
+                message: 'Profile successfully created, please check your email.',
+                data: null
+            }
+            return response.json(status)
+        }
     const status: Status = {
         status: 500,
         message: error.message,

@@ -16,7 +16,17 @@ export async function insertCard (card: Card): Promise<string> {
     return "Card created"
 }
 
+<<<<<<< HEAD
 export async function selectCardByCardId (cardId: string): Promise<Card|null> {
     const result = <Card[]> await sql  `SELECT card_id, card_description,card_market_value, card_name FROM card WHERE card_id = ${cardId}`
     return result?.length === 1 ? result[0] : null
+=======
+export async function selectCardByCardId (cardId: string): Promise<Card[]> {
+    return <Card[]> await sql  `SELECT (card_id, card_description,card_market_value, card_name) FROM card WHERE card_id = ${cardId}`
+
+}
+
+export async function selectCardByCardName (cardName: string): Promise<Card[]> {
+    return <Card[]> await sql `SELECT * FROM card WHERE card_name = ${cardName}`
+>>>>>>> develop
 }
