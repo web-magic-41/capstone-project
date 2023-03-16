@@ -1,4 +1,4 @@
-import {Button, Col, Container, FloatingLabel, Form, Image, InputGroup, Row} from "react-bootstrap";
+import {Button, Col, Container, FloatingLabel, Form, FormControl, Image, InputGroup, Row} from "react-bootstrap";
 import React from "react";
 import cat from "./cat.jpg"
 import {httpConfig} from "../../utils/http-config.js";
@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import * as Yup from "yup";
 import {Formik} from "formik";
 import {DisplayError} from "./componets/DisplayError.jsx";
+import {useDropzone} from "react-dropzone";
+import {DisplayStatus} from "./componets/DisplayStatus.jsx";
 
 export function ListACard() {
 
@@ -36,9 +38,8 @@ export function ListACard() {
         let listingFrontImg = 'frontImage temporary text';
         let listingBackImg = 'backImage temporary text';
         // need listingCardId
-
+        //reeeeee get cardId for listing rreeeeeee
         httpConfig.post()
-
 
 
         const listing = {listingProfileId, listingFrontImg, listingBackImg, listingClaimed: false, ...values}
@@ -71,6 +72,7 @@ export function ListACard() {
 
 function ListingFormContent(props) {
     const {
+        setFieldValue,
         status,
         values,
         errors,
@@ -86,85 +88,160 @@ function ListingFormContent(props) {
 
     return (
         <>
-            <div id={"listACard"}>
-                <Container className={"justify-content-center mt-3"}>
-                    <Row>
-                        <Col id={"cat"} md={2} className={"mx-auto mb-3 d-block text-center"}>
-                            <Image src={cat} fluid={true} alt="placeHolder"/>
-                        </Col>
-                        <Col md={8} className={"d-flex justify-form"}>
-                            <Form id={"listingForm"} onSubmit={handleSubmit}>
-
-
-                                <Form.Group className={"mb-3"} controlId={'cardName'}>
-                                    <FloatingLabel
-                                        controlId="floatingInput"
-                                        label="Card Name"/>
-
-                                    <InputGroup>
-
-                                        <Form.Control
-                                            className={``}
-                                            name={"cardName"}
-                                            value={values.cardName}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            type="text"
-                                            placeholder='i.e "Waste Not"'/>
-                                    </InputGroup>
-                                    <DisplayError errors={errors} touched={touched} field={"cardName"}/>
-                                </Form.Group>
-
-
-                                <Form.Group className={"mb-3"} controlId={'listingCardDesiredValue'}>
-                                    <FloatingLabel controlId="AskingValue" label="Asking Value"/>
-                                    <InputGroup>
-                                        <Form.Control
-                                            className={``}
-                                            name={"listingCardDesiredValue"}
-                                            value={values.listingCardDesiredValue}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            type="text"
-                                            placeholder="$43.22"/>
-                                        </InputGroup>
-                                    <DisplayError errors={errors} touched={touched} field={"listingCardDesiredValue"}/>
-                                </Form.Group>
-
-
-                                <Form.Group className={"mb-3"} controlId={'listingCardDescription'}>
-                                    <FloatingLabel controlId="Description" label="Description"/>
-                                    <InputGroup>
-                                        <Form.Control
-                                            className={``}
-                                            name={"listingCardDescription"}
-                                            value={values.listingCardDescription}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            type="text"
-                                            placeholder="blah blah"
-                                            style={{height: '150px'}}/>
-                                        </InputGroup>
-                                    <DisplayError errors={errors} touched={touched} field={"listingCardDescription"}/>
-                                </Form.Group>
-
-
-                                <Form.Group>
-                                <Button id={"button1"} className={"me-3"}
-                                        variant="dark" size="lg"
-                                        onClick={handleReset}
-                                        disabled={!dirty || isSubmitting}>
-                                    Cancel
+        <div id={"listACard"}>
+            <Container className={"justify-content-center mt-3"}>
+                <Row>
+                    <Col id={"cat"} md={2} className={"mx-auto mb-3 d-block text-center"}>
+                        <Form>
+                            <ImageDropZone
+                                formikProps={{
+                                    values,
+                                    handleChange,
+                                    handleBlur,
+                                    setFieldValue,
+                                    fieldValue: 'listingFrontImg'
+                                }}
+                            />
+                            <Form.Group className={"mt-3"}>
+                                <Button className="btn btn-primary" type="submit">Submit</Button>
+                                {' '}
+                                <Button
+                                    className="btn btn-danger"
+                                    onClick={handleReset}
+                                    disabled={!dirty || isSubmitting}
+                                >Reset
                                 </Button>
-                                <Button className={"gy-3"} id={"button2"} variant="dark" size="lg" type={'submit'}>
-                                    Post Listing
-                                </Button>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-        </>
+                            </Form.Group>
+                        </Form>
+                        <DisplayStatus status={status}/>
+
+
+                </Col>
+
+                <Col md={8} className={"d-flex justify-form"}>
+                    <Form id={"listingForm"} onSubmit={handleSubmit}>
+
+
+                        <Form.Group className={"mb-3"} controlId={'cardName'}>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Card Name"/>
+
+                            <InputGroup>
+
+                                <Form.Control
+                                    className={``}
+                                    name={"cardName"}
+                                    value={values.cardName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder='i.e "Waste Not"'/>
+                            </InputGroup>
+                            <DisplayError errors={errors} touched={touched} field={"cardName"}/>
+                        </Form.Group>
+
+
+                        <Form.Group className={"mb-3"} controlId={'listingCardDesiredValue'}>
+                            <FloatingLabel controlId="AskingValue" label="Asking Value"/>
+                            <InputGroup>
+                                <Form.Control
+                                    className={``}
+                                    name={"listingCardDesiredValue"}
+                                    value={values.listingCardDesiredValue}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder="$43.22"/>
+                            </InputGroup>
+                            <DisplayError errors={errors} touched={touched} field={"listingCardDesiredValue"}/>
+                        </Form.Group>
+
+
+                        <Form.Group className={"mb-3"} controlId={'listingCardDescription'}>
+                            <FloatingLabel controlId="Description" label="Description"/>
+                            <InputGroup>
+                                <Form.Control
+                                    className={``}
+                                    name={"listingCardDescription"}
+                                    value={values.listingCardDescription}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    placeholder="blah blah"
+                                    style={{height: '150px'}}/>
+                            </InputGroup>
+                            <DisplayError errors={errors} touched={touched} field={"listingCardDescription"}/>
+                        </Form.Group>
+
+
+                        <Form.Group>
+                            <Button id={"button1"} className={"me-3"}
+                                    variant="dark" size="lg"
+                                    onClick={handleReset}
+                                    disabled={!dirty || isSubmitting}>
+                                Cancel
+                            </Button>
+                            <Button className={"gy-3"} id={"button2"} variant="dark" size="lg" type={'submit'}>
+                                Post Listing
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+        </div>
+</>
+)
+}
+
+
+function ImageDropZone({formikProps}) {
+
+    const onDrop = React.useCallback(acceptedFiles => {
+
+        const formData = new FormData()
+        formData.append('image', acceptedFiles[0])
+
+        formikProps.setFieldValue(formikProps.fieldValue, formData)
+
+    }, [formikProps])
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
+    return (
+        <Form.Group className={"mb-3"} {...getRootProps()}>
+            <Form.Label>Front Image</Form.Label>
+
+            <InputGroup size="lg" className="">
+                {
+                    formikProps.values.listingFrontImg &&
+                    <>
+                        <div className="bg-transparent m-0">
+                            <Image fluid={true} height={100} rounded={true} thumbnail={true} width={100}
+                                   alt="front image" src={formikProps.values.listingFrontImg}/>
+                        </div>
+
+                    </>
+                }
+                <div className="d-flex flex-fill bg-light justify-content-center align-items-center border rounded">
+                    <FormControl
+                        aria-label="front image file drag and drop area"
+                        aria-describedby="image drag drop area"
+                        className="form-control-file"
+                        accept="image/*"
+                        onChange={formikProps.handleChange}
+                        onBlur={formikProps.handleBlur}
+                        {...getInputProps()}
+                    />
+                    {
+                        isDragActive ?
+                            <span className="align-items-center">Drop image here</span> :
+                            <span className="align-items-center">Drag and drop image here, or click here to select an image</span>
+                    }
+                </div>
+
+
+            </InputGroup>
+        </Form.Group>
     )
 }
