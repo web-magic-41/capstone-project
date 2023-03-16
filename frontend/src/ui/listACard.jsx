@@ -37,6 +37,10 @@ export function ListACard() {
         let listingBackImg = 'backImage temporary text';
         // need listingCardId
 
+        httpConfig.post()
+
+
+
         const listing = {listingProfileId, listingFrontImg, listingBackImg, listingClaimed: false, ...values}
         console.log(listing)
         httpConfig.post("/apis/listing/", listing)
