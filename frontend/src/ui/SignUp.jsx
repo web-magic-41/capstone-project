@@ -13,10 +13,10 @@ export function SignUp() {
     const navigate = useNavigate()
     const signUp = {
         profileEmail: "",
-        profileAtHandle: "",
+        profileUsername: "",
         profilePassword: "",
         profilePasswordConfirm: "",
-        profilePhone: "",
+        profilePhoneNumber: "",
     }
 
     const validator = Yup.object().shape({
@@ -31,7 +31,7 @@ export function SignUp() {
         profilePasswordConfirm: Yup.string()
             .required("Password Confirm is required")
             .min(8, "Password must be at least eight characters"),
-        profilePhone: Yup.string()
+        profilePhoneNumber: Yup.string()
             .min(10, "phone number is to short")
             .max(10, "phone Number is to long")
     });
@@ -45,7 +45,7 @@ export function SignUp() {
                         setTimeout(() => {
                             navigate("/profile")
                         }, 1000);
-                       // resetForm();
+                       resetForm();
                     }
                     setStatus({message, type});
                 }
@@ -86,7 +86,7 @@ export function SignUp() {
             <Container className={" mt-5"}>
                 <Row>
                     <Col className={"d-flex justify-content-center"}>
-                        <Form id={"listingForm"}>
+                        <Form onSubmit={handleSubmit} id={"listingForm"}>
 
                             <Form.Group className={"mb-3"}>
                                 <FloatingLabel controlId="profileUsername" label="Username">
@@ -117,14 +117,14 @@ export function SignUp() {
                             </Form.Group>
 
                             <Form.Group className={"mb-3"}>
-                                <FloatingLabel controlId="profilePhone" label="Phone Number">
-                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profilePhone}type="tel" placeholder="Phone Number"/>
+                                <FloatingLabel controlId="profilePhoneNumber" label="Phone Number">
+                                    <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profilePhoneNumber}type="tel" placeholder="Phone Number"/>
                                 </FloatingLabel>
-                                <DisplayError errors={errors} touched={touched} field={"profilePhone"}/>
+                                <DisplayError errors={errors} touched={touched} field={"profilePhoneNumber"}/>
                             </Form.Group>
 
-                            <Button className={"gy-3"} id={"button2"} variant="dark" size="lg">
-                                Login
+                            <Button className={"gy-3"} type={"submit"} id={"button2"} variant="dark" size="lg">
+                                Sign Up
                             </Button>
                             <DisplayStatus status={status} />
                         </Form>

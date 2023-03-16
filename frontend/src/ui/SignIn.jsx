@@ -91,7 +91,7 @@ function SigninFormContent(props) {
 
                     <FloatingLabel className={'mb-4'} controlId="profilePassword" label="Password">
                         <Form.Control className={'signin-search-bar'} onChange={handleChange} onBlur={handleBlur}
-                                      name="profilePassword" value={values.profilePassword} type="password"/>
+                                      name={"profilePassword"} value={values.profilePassword} type="password"/>
                     </FloatingLabel>
                     <DisplayError errors={errors} touched={touched} field={"profilePassword"}/>
                     <Button className={'align-self-end'} type={"submit"} id={"login"} md={4} variant="dark"

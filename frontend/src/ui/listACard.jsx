@@ -92,7 +92,7 @@ function ListingFormContent(props) {
             <Container className={"justify-content-center mt-3"}>
                 <Row>
                     <Col id={"cat"} md={2} className={"mx-auto mb-3 d-block text-center"}>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <ImageDropZone
                                 formikProps={{
                                     values,
