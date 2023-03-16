@@ -13,6 +13,7 @@ import {SignUp} from "./SignUp";
 import {Profile} from "./Profile";
 import {Provider} from "react-redux";
 import React from "react";
+import {BrowseCard} from "./BrowseCard.jsx";
 
 
 
@@ -36,6 +37,7 @@ export function App({store}) {
                     <Route path='/results' element={<Results/>}/>
                     <Route path={"sign-up"} element={<SignUp/>}/>
                     <Route path={"profile"} element={<Profile/>}/>
+                    <Route path={"browseCard"} element={<BrowseCard/>}/>
                 </Routes>
             </BrowserRouter>
             </Provider>

@@ -22,6 +22,7 @@ export function Navigation() {
                             <Nav.Link href="Sign-up">Sign Up</Nav.Link>
                             <Nav.Link href="Sign-in">Sign In</Nav.Link>
                             <Nav.Link href="Browse">Browse</Nav.Link>
+                            <Nav.Link href="BrowseCard">Create Listing</Nav.Link>
                             <Nav.Link href="Profile">Profile</Nav.Link>
                             <Nav.Link href="Messages">Messages</Nav.Link>
                             <Nav.Link href="Log-out">Log Out</Nav.Link>
