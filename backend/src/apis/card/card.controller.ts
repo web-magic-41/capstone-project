@@ -1,6 +1,6 @@
 import {Status} from "../../utils/interfaces/Status";
 import { NextFunction, Request, Response } from 'express'
-import {insertCard, selectCardByCardId} from "../../utils/models/Card";
+import {insertCard, selectCardByCardId, selectCardByCardName} from "../../utils/models/Card";
 
 export async function postCardController (request: Request, response: Response): Promise<Response<Status>> {
     try {
@@ -36,6 +36,30 @@ export async function getCardByCardId (request:Request, response: Response,): Pr
         const {cardId} = request.params
         const data = await selectCardByCardId(cardId)
         return response.json({status: 200, message: null, data})
+    } catch (error) {
+        return response.json({
+            status: 500,
+            message: "Couldn't retrieve card try again later",
+            data: []
+        })
+    }
+}
+
+export async function getCardByCardName (request:Request, response: Response,): Promise<Response<Status>> {
+    try {
+
+
+
+        const {cardName} = request.body
+        const result = await selectCardByCardName(cardName)
+
+        // @ts-ignore
+        const status = {
+            status: 200,
+            message: result,
+            data: null
+        }
+            return response.json(status)
     } catch (error) {
         return response.json({
             status: 500,

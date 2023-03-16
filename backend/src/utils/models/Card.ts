@@ -20,3 +20,7 @@ export async function selectCardByCardId (cardId: string): Promise<Card[]> {
     return <Card[]> await sql  `SELECT (card_id, card_description,card_market_value, card_name) FROM card WHERE card_id = ${cardId}`
 
 }
+
+export async function selectCardByCardName (cardName: string): Promise<Card[]> {
+    return <Card[]> await sql `SELECT * FROM card WHERE card_name = ${cardName}`
+}

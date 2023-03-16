@@ -2,7 +2,7 @@ import {Router} from "express";
 import {asyncValidatorController} from "../../utils/controllers/async-validator.controller";
 import {check} from "express-validator";
 import { isLoggedIn } from '../../utils/controllers/isLoggedIn.controller'
-import {getCardByCardId, postCardController} from "./card.controller";
+import {getCardByCardId, getCardByCardName, postCardController} from "./card.controller";
 
 
 const router = Router()
@@ -17,6 +17,8 @@ router.route('/cardId/:cardId')
         check('cardId', 'please provide a valid cardId').isUUID()
     ]), getCardByCardId)
 
+router.route('/cardName')
+    .post(getCardByCardName)
 
 export default router
 /*
