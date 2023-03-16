@@ -2,8 +2,8 @@ import {httpConfig} from "../../utils/http-config.js";
 import { createSlice } from '@reduxjs/toolkit'
 
 const listingSlice = createSlice ({
-    name: 'listing',
-    initialState: {},
+    name: 'listings',
+    initialState: [],
     reducers: {
         setInitialListings: (listings, action) => {
             return action.payload
