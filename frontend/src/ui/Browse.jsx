@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 
 export function Browse() {
+    //step one:get listings
     const listings = useSelector(state => state.listings ? state.listings : []);
 
     const dispatch = useDispatch();
@@ -13,6 +14,18 @@ export function Browse() {
         dispatch(fetchAllListings());
     };
     useEffect(effects, [dispatch]);
+
+
+
+    //step two:filter listings
+
+    //need to JOIN listing and card tables in getAllListings()
+
+    //step three:put filtered listings into state
+
+    //step four: redirect to results page
+    //
+
 
     return (
         <>
@@ -37,9 +50,8 @@ export function Browse() {
 
                 </div>
                 <div>
-                    {listings.map(listing => <>
-                    <span>{listing.name}
-                </span></>)}
+                    {listings.length > 0 ? listings.map(listing => <>
+                        <span>{listing.listingCardDescription}</span></>) : <></>}
                 </div>
             </div>
         </>
