@@ -3,65 +3,72 @@ import Button from "react-bootstrap/Button";
 import {Formik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
 import {httpConfig} from "./componets/HttpConfig.js";
-
+import {setCards} from "../store/card.js";
+import * as Yup from "yup"
 export function BrowseCard() {
 
-        const card = {
-            cardName: "",
-        };
+    const card = {
+        cardName: "",
+    };
 
-        const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-        const auth = useSelector(state => state.auth ? state.auth : null);
+    const auth = useSelector(state => state.auth ? state.auth : null);
 
-    let Yup;
+
     const validator = Yup.object().shape({
-            cardName: Yup.string()
-                .required("Card Name is required"),
-        });
+        cardName: Yup.string()
+            .required("Card Name is required"),
+    });
 
-        const getCards = (values, {resetForm, setStatus}) => {
-            const profileId = auth?.profileId ?? null
-            const tweet = {profileId, ...values}
-            httpConfig.post("/apis/tweet/", tweet)
-                .then(reply => {
-                        let {message, type} = reply;
+    const getCards = (values, {resetForm, setStatus}) => {
 
-                        if(reply.status === 200) {
-                            resetForm();
-                            dispatch(fetchAllTweets())
+        const card = {...values}
+        httpConfig.post("/apis/card/cardName/", card)
+            .then(reply => {
+                    let {message, type} = reply;
+
+                    if (reply.status === 200) {
+                        resetForm();
+                        if (reply.data === null) {
+                            setStatus("no cards found")
+                        } else{
+                            dispatch(setCards(reply.data))
                         }
-                        setStatus({message, type});
+
                     }
-                );
-        };
+                    setStatus({message, type});
+                }
+            );
+    };
 
 
-        return (
-            <Formik
-                initialValues={tweet}
-                onSubmit={submitTweet}
-                validationSchema={validator}
-            >
-                {BrowseCard}
-            </Formik>
+    return (
+        <Formik
+            initialValues={card}
+            onSubmit={getCards}
+            validationSchema={validator}
+        >
+            {BrowseCardForm}
+        </Formik>
 
-        )
+    )
 
 }
-  function BrowseCard(props){
-        const {
-            status,
-            values,
-            errors,
-            touched,
-            dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            handleReset
-        } = props;
+
+function BrowseCardForm(props) {
+    const {
+        status,
+        values,
+        errors,
+        touched,
+        dirty,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        handleReset
+    } = props;
 
     return (
         <>
@@ -71,15 +78,16 @@ export function BrowseCard() {
 
                     <div className={''}>
 
-                        <FloatingLabel className={'mb-3'} controlId="floatingPassword" label="Search">
-                            <Form.Control className={'browse-search-bar'} type="Search Criteria"
+                        <FloatingLabel className={'mb-3'} controlId="cardName" label="Search">
+                            <Form.Control className={'browse-search-bar'} onChange={handleChange} onBlur={handleBlur}
+                                          name={"cardName"} value={values.cardName}type="search"
                                           placeholder="Search Criteria"/>
                         </FloatingLabel>
 
                     </div>
 
                     <div className={``}>
-                        <Button className={`button-browse`} md={4} variant="dark" size="md">Search</Button>
+                        <Button className={`button-browse`} type={"submit"} md={4} variant="dark" size="md">Search</Button>
 
 
                     </div>

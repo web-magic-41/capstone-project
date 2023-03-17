@@ -22,5 +22,6 @@ export async function selectCardByCardId (cardId: string): Promise<Card[]> {
 }
 
 export async function selectCardByCardName (cardName: string): Promise<Card[]> {
-    return <Card[]> await sql `SELECT * FROM card WHERE card_name = ${cardName}`
+    cardName = '%' + cardName + '%'
+    return <Card[]> await sql `SELECT * FROM card WHERE LOWER(card_name) LIKE LOWER(${cardName})`
 }

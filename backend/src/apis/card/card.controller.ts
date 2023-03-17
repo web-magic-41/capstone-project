@@ -56,8 +56,8 @@ export async function getCardByCardName (request:Request, response: Response,): 
         // @ts-ignore
         const status = {
             status: 200,
-            message: result,
-            data: null
+            message: null,
+            data: result
         }
             return response.json(status)
     } catch (error) {
