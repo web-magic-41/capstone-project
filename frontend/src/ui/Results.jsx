@@ -36,15 +36,15 @@ export function Results() {
     return (
         <><div className="browse-background">
             <section className="home-image">
-                <Container>
-                    <Row>
-                        <Col>
+                <Container className={"mt-3"}>
+                    <Row xs={1} md={4} className={"g-4"}>
+
                             {
                                 listings.map(listing=>  <ListingCard profile={profiles[listing.listingProfileId]} card={cards[listing.listingCardId]} listing={listing}/>)
 
                              }
 
-                        </Col>
+
                     </Row>
                 </Container>
             </section>
