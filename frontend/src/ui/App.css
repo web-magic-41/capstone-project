@@ -117,6 +117,15 @@ position: relative;
     color: white;
 }
 
+.mousehover {
+    cursor: pointer;
+}
+.mousehover:hover {
+    background: #ffffffcc !important;
+}
+.vh-25 {
+    height: 25vh;
+   }
 .browseCardSearchContainer {
     background-color: #00000077;
     border-radius: 5px;

@@ -73,7 +73,7 @@ export function BrowseCard() {
 
                 return (
                     <div className={`col-md-3 col-12 d-flex justify-content-center`}>
-                    <a className={`d-flex justify-content-around`} href={`${document.location.host}/ListACard/${card.cardId}`}>
+                    <a className={`d-flex justify-content-around`} href={`http://${document.location.host}/ListACard/${card.cardId}`}>
                         <img className={`w-75`} src={card.cardImageUrl} alt={`Image of the Magic card: ${card.cardName}`}/>
                     </a>
                     </div>

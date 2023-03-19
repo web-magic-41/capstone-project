@@ -8,6 +8,7 @@ export async function imageUploadController (request: Request, response: Respons
             throw new Error('Please provide a valid file type ')
         }
 
+        console.log('img upload controller')
         const message: string = await uploadToCloudinary(request.file)
         return response.json({ status: 200, data: null, message: message })
     } catch (error: any) {

@@ -17,6 +17,7 @@ import { messageRoute } from './apis/Message/message.route'
 import listingRouter from "./apis/listing/listing.route";
 import ratingRouter from "./apis/rating/rating.route";
 import {ProfileRoute} from "./apis/Profile/profile.route";
+import {ImageUploadRouter} from "./apis/image-upload/image-upload.route";
 
 const redisClient = createClient({ legacyMode: true, socket: { host: process.env.REDIS_HOST } })
 redisClient.connect().catch(console.error)
@@ -66,7 +67,7 @@ export class App {
         this.app.use('/apis/message', messageRoute)
         this.app.use('/apis/card', cardRoute)
         this.app.use('/apis/profile', ProfileRoute)
-
+        this.app.use('/apis/image-upload', ImageUploadRouter)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port
