@@ -4,9 +4,9 @@ import cards from "../store/cards.js";
 
 
 export function ListingCard({listing,profile,card}) {
-    console.log("profile HERE", profile)
-    console.log("props in listing card", listing)
-    console.log("card Name BROTHER", card)
+    // console.log("profile HERE", profile)
+    // console.log("props in listing card", listing)
+    // console.log("card Name BROTHER", card)
     return (
         <>
         <Col>
