@@ -26,7 +26,7 @@ export function Profile() {
                     <Row className={"mt-3"}>
                         <Col>
                             {/*<Image src={cat} fluid={true} alt="placeHolder"/>*/}
-                            <h2 id={"username"} className={"d-inline ms-2"}>Username</h2>
+                            <h2 id={"username"} className={"d-inline ms-2"}>{profile?.profileUsername}</h2>
                         </Col>
 
                         <Col>
@@ -40,7 +40,7 @@ export function Profile() {
                                     <Button className={"ms-1"} id={"button2"} variant="dark" size="md">
                                         Rate User
                                     </Button>
-                                    <Button className={"ms-2"} id={"button2"} variant="dark" size="md">
+                                    <Button className={"ms-2"} id={"button2"} variant="dark" size="md" disabled>
                                         Message
                                     </Button>
                                 </Form.Group>
