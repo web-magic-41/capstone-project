@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {httpConfig} from "../../utils/http-config.js";
 
-const slice = createSlice({
+const cardSlice = createSlice({
     name: "cards",
     initialState: [],
     reducers: {
@@ -11,14 +11,13 @@ const slice = createSlice({
         }
     }
 })
+console.log("actions", cardSlice)
 
-export const {setCards} = slice.actions
+export const {setCards} = cardSlice.actions
 
 export const fetchCards = (cardName) => async (dispatch) => {
     const {data} =  await httpConfig.post("/apis/cardName/", cardName)
     dispatch(setCards(data));
-
-
 };
 
-export default slice.reducer
+export default cardSlice.reducer

@@ -12,14 +12,20 @@ export const cardValidator: Schema = {
             errorMessage: 'Card description can be no longer than 1000 characters',
             options: {max: 1000}
         }
-    },cardMarketValue: {
-        isInt: {
-            errorMessage: 'Market value can only be of type Integer'
+    },
+    cardImageURL: {
+        isURL: {
+            errorMessage: 'Needs to be a URL',
+        },
+        isLength: {
+            errorMessage: 'ImageURL too long',
+            options: {max: 128}
+
         }
     },
     cardName: {
         isLength: {
-            errorMessage: 'listing name can only be 32 characters',
+            errorMessage: 'listing name can be up to 32 characters',
             options: {max: 32}
         }
     }

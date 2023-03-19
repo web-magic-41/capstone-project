@@ -17,10 +17,10 @@ create table profile(
 create table card(
     card_id uuid not null,
     card_description varchar(1000),
-    card_market_value varchar(16) not null,
-    card_name varchar(32) not null unique,
+    card_image_URL varchar(128),
+    card_name varchar(32) not null,
+    card_tcg_player_id varchar(16) not null,
     primary key(card_id)
-
 );
 
 create table listing(

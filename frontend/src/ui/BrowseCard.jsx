@@ -5,7 +5,17 @@ import {useDispatch, useSelector} from "react-redux";
 import {httpConfig} from "./componets/HttpConfig.js";
 import {setCards} from "../store/card.js";
 import * as Yup from "yup"
+import {useState} from "react";
+
+
+
 export function BrowseCard() {
+
+
+    const [cardList, setCardList] = useState([]);
+    const handleCardList = (arr) => {
+        setCardList(arr)
+    }
 
     const card = {
         cardName: "",
@@ -22,7 +32,6 @@ export function BrowseCard() {
     });
 
     const getCards = (values, {resetForm, setStatus}) => {
-
         const card = {...values}
         httpConfig.post("/apis/card/cardName/", card)
             .then(reply => {
@@ -32,8 +41,8 @@ export function BrowseCard() {
                         resetForm();
                         if (reply.data === null) {
                             setStatus("no cards found")
-                        } else{
-                            dispatch(setCards(reply.data))
+                        } else {
+                            handleCardList(reply.data);
                         }
 
                     }
@@ -43,20 +52,44 @@ export function BrowseCard() {
     };
 
 
-    return (
-        <Formik
-            initialValues={card}
-            onSubmit={getCards}
-            validationSchema={validator}
-        >
-            {BrowseCardForm}
-        </Formik>
+    return (<>
+        <div className={`pt-5 d-flex flex-column align-items-center justify-content-start browse-background`}>
+            <Formik
+                initialValues={card}
+                onSubmit={getCards}
+                validationSchema={validator}
+            >
+                {BrowseCardForm}
 
-    )
+            </Formik>
+
+            <div className={`d-flex mt-5 justify-content-around`}>
+            {cardList.length > 0 ? cardList.map((card) => {
+
+                //remove this temp code when scryfall data is populated
+                if (card.cardName === "Demonic Tutor") {
+                    card.cardImageUrl = 'https://cards.scryfall.io/normal/front/3/b/3bdbc231-5316-4abd-9d8d-d87cff2c9847.jpg?1618695728'
+                }
+
+                return (
+                    <div className={`col-md-3 col-12 d-flex justify-content-center`}>
+                    <a className={`d-flex justify-content-around`} href={`${document.location.host}/ListACard/${card.cardId}`}>
+                        <img className={`w-75`} src={card.cardImageUrl} alt={`Image of the Magic card: ${card.cardName}`}/>
+                    </a>
+                    </div>
+                )
+            }):<> </>
+            }
+            </div>
+        </div>
+        </>
+)
 
 }
 
 function BrowseCardForm(props) {
+    //console.log("test")
+    //console.log(cardList)
     const {
         status,
         values,
@@ -71,29 +104,27 @@ function BrowseCardForm(props) {
     } = props;
 
     return (
-        <>
-            <div className={`browse-background d-flex align-items-center`}>
-                <p className="browsecard-text">Select a card name to create a listing for that card.</p>
-                <Form onSubmit={handleSubmit}>
+        <div className={`browseCardSearchContainer`}>
 
-                    <div className={''}>
+            <p className="browsecard-text">Select a card name to create a listing for that card.</p>
+            <Form onSubmit={handleSubmit}>
 
-                        <FloatingLabel className={'mb-3'} controlId="cardName" label="Search">
-                            <Form.Control className={'browse-search-bar'} onChange={handleChange} onBlur={handleBlur}
-                                          name={"cardName"} value={values.cardName}type="search"
-                                          placeholder="Search Criteria"/>
-                        </FloatingLabel>
+                <div className={''}>
 
-                    </div>
+                    <FloatingLabel className={'mb-3'} controlId="cardName" label="Search">
+                        <Form.Control className={'browse-search-bar'} onChange={handleChange} onBlur={handleBlur}
+                                      name={"cardName"} value={values.cardName} type="search"
+                                      placeholder="Search Criteria"/>
+                    </FloatingLabel>
 
-                    <div className={``}>
-                        <Button className={`button-browse`} type={"submit"} md={4} variant="dark" size="md">Search</Button>
+                </div>
 
-
-                    </div>
-                </Form>
-            </div>
-        </>
+                <div className={``}>
+                    <Button className={`button-browse`} type={"submit"} md={4} variant="dark"
+                            size="md">Search</Button>
+                </div>
+            </Form>
+        </div>
     )
 }
 

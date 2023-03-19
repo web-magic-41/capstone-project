@@ -1,18 +1,18 @@
 import {Status} from "../../utils/interfaces/Status";
-import { NextFunction, Request, Response } from 'express'
+import { Request, Response } from 'express'
 import {insertCard, selectCardByCardId, selectCardByCardName} from "../../utils/models/Card";
 
 export async function postCardController (request: Request, response: Response): Promise<Response<Status>> {
     try {
-        const {cardId, cardDescription, cardName, cardMarketValue}= request.body
+        const {cardId, cardDescription, cardImageURL, cardName, cardTcgPlayerId}= request.body
         // @ts-ignore
 
         const card: Card = {
             cardId,
             cardDescription,
+            cardImageURL,
             cardName,
-            cardMarketValue
-
+            cardTcgPlayerId
         }
         const result = await insertCard(card)
 

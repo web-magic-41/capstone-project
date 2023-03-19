@@ -5,19 +5,22 @@ export interface Card {
     cardId: string
     cardName: string
     cardDescription: string
-    cardMarketValue: string
+    cardImageURL: string
+    cardTcgPlayerId: string
 }
 
 export async function insertCard (card: Card): Promise<string> {
-    const { cardName, cardDescription, cardMarketValue} = card
+    const { cardName, cardDescription, cardImageURL, cardTcgPlayerId} = card
+
+    console.log(card)
     await sql `
-        INSERT INTO card (card_id, card_name, card_description, card_market_value) 
-        VALUES(gen_random_uuid(), ${cardName}, ${cardDescription}, ${cardMarketValue})`
+        INSERT INTO card (card_id, card_name, card_image_URL, card_description, card_tcg_player_id ) 
+        VALUES(gen_random_uuid(), ${cardName}, ${cardImageURL}, ${cardDescription}, ${cardTcgPlayerId})`
     return "Card created"
 }
 
 export async function selectCardByCardId (cardId: string): Promise<Card[]> {
-    return <Card[]> await sql  `SELECT (card_id, card_description,card_market_value, card_name) FROM card WHERE card_id = ${cardId}`
+    return <Card[]> await sql  `SELECT * FROM card WHERE card_id = ${cardId}`
 
 }
 

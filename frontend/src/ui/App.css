@@ -117,16 +117,17 @@ position: relative;
     color: white;
 }
 
+.browseCardSearchContainer {
+    background-color: #00000077;
+    border-radius: 5px;
+    padding: 1.5em;
+}
 .browse-background {
-    background-size: cover;
-    background: lightgray url(../Images/483550.jpg) no-repeat center;
-    height: 100%;
-
-    width: 100%;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background: lightgray url(../Images/483550.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
 }
 
 .message{
