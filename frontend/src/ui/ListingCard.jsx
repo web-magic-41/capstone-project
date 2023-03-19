@@ -11,8 +11,8 @@ export function ListingCard({listing,profile,card}) {
         <>
         <Col>
         <Card>
-            <Card.Img variant="top" src={listing.listingFrontImg}/>
-            <Card.Img variant="top" src={listing.listingBackImg}/>
+            <Card.Img variant="top" src={`${listing.listingFrontImg.replaceAll("&#x2F;","/")}`}/>
+            {/*<Card.Img variant="top" src={listing.listingBackImg}/>*/}
             <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text >
