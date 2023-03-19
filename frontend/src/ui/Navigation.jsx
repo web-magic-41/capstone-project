@@ -19,13 +19,13 @@ export function Navigation() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link href="Sign-up">Sign Up</Nav.Link>
-                            <Nav.Link href="Sign-in">Sign In</Nav.Link>
-                            <Nav.Link href="Browse">Browse</Nav.Link>
-                            <Nav.Link href="BrowseCard">Create Listing</Nav.Link>
-                            <Nav.Link href="Profile">Profile</Nav.Link>
-                            <Nav.Link href="Messages">Messages</Nav.Link>
-                            <Nav.Link href="Log-out">Log Out</Nav.Link>
+                            <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                            <Nav.Link href="/sign-in">Sign In</Nav.Link>
+                            <Nav.Link href="/browse">Browse</Nav.Link>
+                            <Nav.Link href="/browseCard">Create Listing</Nav.Link>
+                            <Nav.Link href="/profile">Profile</Nav.Link>
+                            <Nav.Link href="/messages">Messages</Nav.Link>
+                            <Nav.Link href="/log-out">Log Out</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

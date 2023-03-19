@@ -35,9 +35,9 @@ export function App({store}) {
                     <Route path='/messages' element={<Message/>}/>
                     <Route path={"/listACard/:listingCardId"} element={<ListACard/>} listingCardId={":listingCardId"} />
                     <Route path='/results' element={<Results/>}/>
-                    <Route path={"sign-up"} element={<SignUp/>}/>
-                    <Route path={"profile"} element={<Profile/>}/>
-                    <Route path={"browseCard"} element={<BrowseCard/>}/>
+                    <Route path={"/sign-up"} element={<SignUp/>}/>
+                    <Route path={"/profile"} element={<Profile/>}/>
+                    <Route path={"/browseCard"} element={<BrowseCard/>}/>
                 </Routes>
             </BrowserRouter>
             </Provider>

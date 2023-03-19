@@ -9,8 +9,11 @@ import {DisplayError} from "./componets/DisplayError.jsx";
 import {useDropzone} from "react-dropzone";
 import {DisplayStatus} from "./componets/DisplayStatus.jsx";
 import {fetchCurrentUser} from "../store/profile.js";
+import {redirect, useNavigate} from "react-router-dom";
+import {fetchAllListings} from "../store/listings.js";
 
 export function ListACard({match}) {
+    const navigate = useNavigate();
     const [card, setCard] = useState({});
     const handleCard = (obj) => {
         setCard(obj)
@@ -74,6 +77,10 @@ export function ListACard({match}) {
                         if (reply.status === 200) {
                             resetForm();
                             dispatch(fetchAllListings())
+
+                            setTimeout(() => {
+                                navigate('/profile')
+                            }, 1000);
                         }
                         setStatus({message, type});
                     }
