@@ -1,5 +1,7 @@
 import {httpConfig} from "../../utils/http-config.js";
 import { createSlice } from '@reduxjs/toolkit'
+import {fetchProfileByProfileId} from "./profiles.js";
+import {fetchCardByCardId} from "./cards.js";
 
 const listingSlice = createSlice ({
     name: 'listings',
@@ -33,6 +35,26 @@ export function fetchAllListings() {
 
         console.log(listingDictionary)
         dispatch(setInitialListings(listingDictionary))
+
+
+
+        let profileIdSet = new Set
+        for(let listing of data) {
+            const {listingProfileId} = listing
+            if (profileIdSet.has(listingProfileId) === false) {
+                profileIdSet.add (listingProfileId)
+                dispatch(fetchProfileByProfileId(listingProfileId))
+            }
+        }
+
+        let cardIdSet = new Set
+        for(let listing of data) {
+            const {listingCardId} = listing
+            if (cardIdSet.has(listingCardId) === false) {
+                cardIdSet.add (listingCardId)
+                dispatch(fetchCardByCardId(listingCardId))
+            }
+        }
     }
 }
 
