@@ -33,7 +33,7 @@ export function App({store}) {
                     <Route path='/sign-in' element={<SignIn />}/>
                     <Route path='/results' element={<Results/>}/>
                     <Route path='/messages' element={<Message/>}/>
-                    <Route path={"listACard"} element={<ListACard/>} />
+                    <Route path={"/listACard/:listingCardId"} element={<ListACard/>} listingCardId={":listingCardId"} />
                     <Route path='/results' element={<Results/>}/>
                     <Route path={"sign-up"} element={<SignUp/>}/>
                     <Route path={"profile"} element={<Profile/>}/>

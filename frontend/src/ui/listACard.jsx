@@ -9,7 +9,7 @@ import {DisplayError} from "./componets/DisplayError.jsx";
 import {useDropzone} from "react-dropzone";
 import {DisplayStatus} from "./componets/DisplayStatus.jsx";
 
-export function ListACard() {
+export function ListACard({match}) {
 
     // need a validator
     // need a submit listing handler
@@ -37,12 +37,13 @@ export function ListACard() {
         const listingProfileId = auth?.profileId ?? null
         let listingFrontImg = 'frontImage temporary text';
         let listingBackImg = 'backImage temporary text';
-        // need listingCardId
-        //reeeeee get cardId for listing rreeeeeee
-        httpConfig.post()
+        let listingCardId = match.params.listingCardId ? match.params.listingCardId : null;
 
 
-        const listing = {listingProfileId, listingFrontImg, listingBackImg, listingClaimed: false, ...values}
+        //get card name by card id
+
+
+        const listing = {listingProfileId, listingCardId, listingFrontImg, listingBackImg, listingClaimed: false, ...values}
         console.log(listing)
         httpConfig.post("/apis/listing/", listing)
             .then(reply => {
@@ -90,9 +91,11 @@ function ListingFormContent(props) {
         <>
         <div id={"listACard"}>
             <Container className={"justify-content-center mt-3"}>
+
                 <Row>
+                    <Form id={"listingForm"} onSubmit={handleSubmit}>
                     <Col id={"cat"} md={2} className={"mx-auto mb-3 d-block text-center"}>
-                        <Form onSubmit={handleSubmit}>
+
                             <ImageDropZone
                                 formikProps={{
                                     values,
@@ -112,14 +115,13 @@ function ListingFormContent(props) {
                                 >Reset
                                 </Button>
                             </Form.Group>
-                        </Form>
+
                         <DisplayStatus status={status}/>
 
 
                 </Col>
+   <Col md={8} className={"d-flex justify-form"}>
 
-                <Col md={8} className={"d-flex justify-form"}>
-                    <Form id={"listingForm"} onSubmit={handleSubmit}>
 
 
                         <Form.Group className={"mb-3"} controlId={'cardName'}>
@@ -186,8 +188,9 @@ function ListingFormContent(props) {
                                 Post Listing
                             </Button>
                         </Form.Group>
-                    </Form>
+
                 </Col>
+                    </Form>
             </Row>
         </Container>
         </div>
