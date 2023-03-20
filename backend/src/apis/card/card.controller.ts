@@ -4,15 +4,16 @@ import {insertCard, selectCardByCardId, selectCardByCardName} from "../../utils/
 
 export async function postCardController (request: Request, response: Response): Promise<Response<Status>> {
     try {
-        const {cardId, cardDescription, cardImageURL, cardName, cardTcgPlayerId}= request.body
+        const {cardDescription, cardImageURL, cardName, cardPrice, cardScryFallURI}= request.body
         // @ts-ignore
 
         const card: Card = {
-            cardId,
+            cardId :null,
             cardDescription,
             cardImageURL,
             cardName,
-            cardTcgPlayerId
+            cardPrice,
+            cardScryFallURI,
         }
         const result = await insertCard(card)
 

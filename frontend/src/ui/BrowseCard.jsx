@@ -21,11 +21,6 @@ export function BrowseCard() {
         cardName: "",
     };
 
-    const dispatch = useDispatch()
-
-    const auth = useSelector(state => state.auth ? state.auth : null);
-
-
     const validator = Yup.object().shape({
         cardName: Yup.string()
             .required("Card Name is required"),

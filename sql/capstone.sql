@@ -19,7 +19,8 @@ create table card(
     card_description varchar(1000),
     card_image_URL varchar(128),
     card_name varchar(32) not null,
-    card_tcg_player_id varchar(16) not null,
+    card_price varchar(12) not null,
+    card_scryfall_uri varchar(128) not null,
     primary key(card_id)
 );
 

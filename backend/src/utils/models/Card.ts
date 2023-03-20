@@ -2,19 +2,20 @@ import {sql} from "../database.utils";
 
 export interface Card {
     // needs to be the same as in sql file
-    cardId: string
+    cardId: string | null
     cardName: string
     cardDescription: string
     cardImageURL: string
-    cardTcgPlayerId: string
+    cardScryFallURI:string
+    cardPrice: string
 }
 
 export async function insertCard (card: Card): Promise<string> {
-    const { cardName, cardDescription, cardImageURL, cardTcgPlayerId} = card
+    const { cardName, cardDescription, cardImageURL,cardPrice, cardScryFallURI} = card
 
     await sql `
-        INSERT INTO card (card_id, card_name, card_image_URL, card_description, card_tcg_player_id ) 
-        VALUES(gen_random_uuid(), ${cardName}, ${cardImageURL}, ${cardDescription}, ${cardTcgPlayerId})`
+        INSERT INTO card (card_id, card_name, card_image_URL, card_description, card_price, card_scryfall_uri) 
+        VALUES(gen_random_uuid(), ${cardName}, ${cardImageURL}, ${cardDescription}, ${cardPrice}, ${cardScryFallURI})`
     return "Card created"
 }
 
