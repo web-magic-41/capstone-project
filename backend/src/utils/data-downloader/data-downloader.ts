@@ -14,9 +14,16 @@ return main()
 
 const {data:cardsData}= await axios(oracleCardDownloadURI)
 
-            for (let i = 0; i<1000; i++){
-                let cardData = cardsData[i]
+            for (let i = 0; i<cardsData.length; i++){
 
+                let cardData = cardsData[i]
+console.log(i)
+                if (cardData ['image_uris']=== undefined){
+                    continue
+                }
+                if (cardData['set_name']=== 'Amonkhet'){
+
+                }
                 const cardName = cardData['name']
                 const cardScryFallURI = cardData['scryfall_uri']
                 const cardImageURL = cardData ['image_uris'].normal
@@ -29,12 +36,15 @@ const {data:cardsData}= await axios(oracleCardDownloadURI)
                     cardPrice = cardData['prices'].usd ?? 'unavailable'
                 }
                 if (cardData['oracle_text'] === undefined){
-                    cardDescription=cardsData['favor_text']
+                    cardDescription=cardsData['flavor_text'] ?? null
                 }else {
                     cardDescription = `${cardData['oracle_text']}
                     ${cardData['flavor_text']}`
                 }
 const card:Card = {cardId:null, cardName, cardPrice, cardDescription, cardImageURL, cardScryFallURI}
+                if (i ===435){
+                    console.log(card)
+                }
                 await insertCard(card)
 
             }
