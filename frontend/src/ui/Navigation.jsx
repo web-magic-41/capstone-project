@@ -10,7 +10,7 @@ export function Navigation() {
                     <Navbar sticky="top" />
                     <Navbar.Brand href="Home">Home</Navbar.Brand>
                     <img
-                        alt="INSERT ALT HERE"
+                        alt="MTG Finder Logo"
                         src={mtgfinderlogowhite}
                         width="100"
                         height="75"
