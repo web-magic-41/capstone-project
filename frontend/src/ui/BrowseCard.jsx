@@ -58,18 +58,18 @@ export function BrowseCard() {
 
             </Formik>
 
-            <div className={`d-flex mt-5 justify-content-around`}>
+            <div className={`d-flex mt-5 justify-content-around vw-100 flex-wrap`}>
             {cardList.length > 0 ? cardList.map((card) => {
 
                 //remove this temp code when scryfall data is populated
-                if (card.cardName === "Demonic Tutor") {
-                    card.cardImageUrl = 'https://cards.scryfall.io/normal/front/3/b/3bdbc231-5316-4abd-9d8d-d87cff2c9847.jpg?1618695728'
-                }
+                // if (card.cardName === "Demonic Tutor") {
+                //     card.cardImageUrl = 'https://cards.scryfall.io/normal/front/3/b/3bdbc231-5316-4abd-9d8d-d87cff2c9847.jpg?1618695728'
+                // }
 
                 return (
-                    <div className={`col-md-3 col-12 d-flex justify-content-center`}>
+                    <div className={`col-md-3 col-12 d-flex justify-content-center pb-2`}>
                     <a className={`d-flex justify-content-around`} href={`http://${document.location.host}/ListACard/${card.cardId}`}>
-                        <img className={`w-75`} src={card.cardImageUrl} alt={`Image of the Magic card: ${card.cardName}`}/>
+                        <img className={`w-75 card-corners`} src={card.cardImageUrl} alt={`Image of the Magic card: ${card.cardName}`}/>
                     </a>
                     </div>
                 )

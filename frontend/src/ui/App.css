@@ -69,10 +69,11 @@ position: relative;
 }
 
 #profile {
-    background: url(./flesh.jpg) no-repeat center;
-    height: 100%;
-    width: 100%;
-    position: fixed;
+    background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.8), rgba(35,31,32,0.7)), url(./flesh.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
     background-size: cover;
 }
 
@@ -99,8 +100,8 @@ position: relative;
 #dragon{
     background-size: cover;
     background: lightgray url(../Images/shimmerdragon.jpg) no-repeat center;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -133,11 +134,12 @@ position: relative;
     padding: 1.5em;
 }
 .browse-background {
-    background: lightgray url(../Images/483550.jpg);
+    background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.8), rgba(35,31,32,0.7)), url(../Images/483550.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
     min-width: 100vw;
+    background-size: cover;
 }
 
 .message{
@@ -154,8 +156,8 @@ position: relative;
 .signin-background {
     background-size: cover;
     background: lightgray url(../Images/Mtg-Wallpapers-HD-For-Desktop.jpg) no-repeat center;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -196,7 +198,23 @@ position: relative;
     color: white;
 }
 
-#cardImage {
+
+.cardImageWrapper {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.cardImage{
+    height: 150px;
+    width: auto;
+}
+
+.card-corners{
+    border-radius: 10px;
+}
+
+.card-drop-shadow{
+    filter: drop-shadow(30px 10px 4px #00000040);
 }
 

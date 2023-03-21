@@ -62,7 +62,7 @@ export function Profile() {
         <>
             <div id={"profile"}>
                 <Container>
-                    <Row className={"mt-3"}>
+                    <Row className={"pt-3"}>
                         <Col>
                             {/*<Image src={cat} fluid={true} alt="placeHolder"/>*/}
                             <h2 id={"username"} className={"d-inline ms-2"}>{profile?.profileUsername}</h2>

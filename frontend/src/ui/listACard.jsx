@@ -88,7 +88,7 @@ export function ListACard({match}) {
         }
         if (values.listingFrontImg !== undefined) {
 
-            console.log(`shit broke`)
+
             httpConfig.post(`/apis/image-upload/`, values.listingFrontImg)
                 .then(reply => {
                         let { message, type } = reply
@@ -254,6 +254,15 @@ function ImageDropZone({formikProps}) {
         formData.append('image', acceptedFiles[0])
 
         formikProps.setFieldValue(formikProps.fieldValue, formData)
+console.log('swigity swoot')
+        console.log(formikProps)
+        //upload image here
+
+
+        //figure out how to reference image
+
+
+
 
     }, [formikProps])
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
@@ -268,6 +277,7 @@ function ImageDropZone({formikProps}) {
                         <div className="bg-transparent m-0">
                             <Image fluid={true} height={100} rounded={true} thumbnail={true} width={100}
                                    alt="front image" src={formikProps.values.listingFrontImg}/>
+                            {console.log(formikProps.values.listingFrontImg)}
                         </div>
 
                     </>
