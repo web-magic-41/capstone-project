@@ -30,3 +30,6 @@ frontend/setupProxy.js
 
 /backend/dataDownloader/*
 
+node_modules
+package-lock.json
+package.json

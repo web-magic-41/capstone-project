@@ -3,6 +3,7 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import cards from "../store/cards.js";
 
 
+
 export function ListingCard({listing,profile,card}) {
     // console.log("profile HERE", profile)
     // console.log("props in listing card", listing)
@@ -10,9 +11,11 @@ export function ListingCard({listing,profile,card}) {
     return (
         <>
         <Col>
-        <Card>
+        <Card className={'h-100'}>
+            <div id={"cardImage"}>
             <Card.Img variant="top" src={`${listing.listingFrontImg.replaceAll("&#x2F;","/")}`}/>
             {/*<Card.Img variant="top" src={listing.listingBackImg}/>*/}
+            </div>
             <Card.Body>
                 <Card.Title></Card.Title>
                 <Card.Text >
