@@ -35,7 +35,7 @@ export function Results() {
 
     return (
         <><div className="browse-background">
-            <section className="home-image">
+            <section className="">
                 <Container className={"mt-3"}>
                     <Row xs={1} md={4} className={"g-4"}>
 
