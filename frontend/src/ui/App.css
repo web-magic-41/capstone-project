@@ -196,3 +196,6 @@ position: relative;
     color: white;
 }
 
+.card-corners{
+    border-radius: 10px;
+}
