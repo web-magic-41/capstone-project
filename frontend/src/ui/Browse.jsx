@@ -1,22 +1,33 @@
 import Button from 'react-bootstrap/Button';
-import {FloatingLabel, Form, Row} from "react-bootstrap";
+import {Container, FloatingLabel, Form, InputGroup, Row} from "react-bootstrap";
 import React, {useEffect} from "react";
 import {fetchAllListings} from "../store/listings.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {DisplayStatus} from "./componets/DisplayStatus.jsx";
+import {DisplayError} from "./componets/DisplayError.jsx";
+import {Formik} from "formik";
+import * as Yup from "yup";
 
 
 export function Browse() {
 
+    const navigate = useNavigate();
     //step one:get listings
     const listings = useSelector(state => state.listings ? state.listings : []);
 
+    const card = {
+        cardName: "",
+    };
+    const validator = Yup.object().shape({
+        cardName: Yup.string()
+            .required("card name is required"),
+    });
     const dispatch = useDispatch();
     const effects = () => {
         dispatch(fetchAllListings());
     };
     useEffect(effects, [dispatch]);
-
 
 
     //step two:filter listings
@@ -28,35 +39,77 @@ export function Browse() {
     //step four: redirect to results page
     //
 
+    const submit = (values, {resetForm, setStatus}) => {
+
+        console.log('test')
+        console.log(values)
+        let cardQuery = encodeURI(values.cardName)
+
+        setTimeout(() => {
+            navigate(`/results/${cardQuery}`)
+        }, 1000);
+    }
 
     return (
         <>
-            <div className={`browse-background`}>
-
-                <div className={`d-flex align-items-center`}>
-                    <div className={''}>
-                        <FloatingLabel className={'mb-3'} controlId="floatingPassword" label="Search">
-                            <Form.Control className={'browse-search-bar'} type="Search Criteria"
-                                          placeholder="Search Criteria"/>
-                        </FloatingLabel>
-
-                    </div>
-
-                    <div className={``}>
-                        <Button onClick={() => {
-                            dispatch(fetchAllListings())
-                        }
-                        } className={`button-browse`} md={4} variant="dark" size="md">Search</Button>
-                    </div>
-
-
-                </div>
-                <div>
-                    {listings.length > 0 ? listings.map(listing => <>
-                        <span>{listing.listingCardDescription}</span></>) : <></>}
-                </div>
+            <div className={`browse-background d-flex `}>
+                <Formik
+                    initialValues={card}
+                    onSubmit={submit}
+                    validationSchema={validator}
+                >
+                    {BrowseListingForm}
+                </Formik>
             </div>
         </>
     )
 }
 
+function BrowseListingForm(props) {
+
+    const {
+        setFieldValue,
+        status,
+        values,
+        errors,
+        touched,
+        dirty,
+        isSubmitting,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        handleReset
+    } = props;
+
+
+    return (
+        <>
+            <Form onSubmit={handleSubmit}>
+                <div className={`d-flex justify-content-center align-items-center pt-5 h-100`}>
+                    <div className={''}>
+                        <Form.Group controlId="cardName">
+                        <FloatingLabel className={'mb-3'}  label="Search">
+                            <Form.Control
+                                className={'browse-search-bar'}
+                                type="Search Criteria"
+                                placeholder="Search Criteria"
+                                name={"cardName"}
+                                value={values.cardName}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            />
+                        </FloatingLabel>
+                        </Form.Group>
+                    </div>
+
+                    <div className={``}>
+                        <Button type={'submit'}
+                        className={`button-browse`} md={4} variant="dark" size="md">Search</Button>
+                    </div>
+                </div>
+            </Form>
+
+
+        </>
+    )
+}

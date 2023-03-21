@@ -19,6 +19,7 @@ export function ListACard({match}) {
         setCard(obj)
     }
 
+
     const listing = {
         listingCardDescription: "",
         listingCardDesiredValue: "",
@@ -27,7 +28,9 @@ export function ListACard({match}) {
     const dispatch = useDispatch()
 
     const auth = useSelector(state => state.auth ? state.auth : null);
-    const profile = useSelector(state => {return state.currentUser ? state.currentUser : null})
+    const profile = useSelector(state => {
+        return state.currentUser ? state.currentUser : null
+    })
 
     const sideEffects = () => {
         dispatch(fetchCurrentUser())
@@ -64,10 +67,13 @@ export function ListACard({match}) {
         let listingCardId = location.pathname.substr(11) ? location.pathname.substr(11) : null;
 
 
-        console.log(JSON.stringify(values.listingFrontImg))
+        const listing = {
+            listingProfileId,
+            listingBackImg,
+            listingClaimed: false,
+            listingCardId: listingCardId, ...values
+        }
 
-        const listing = {listingProfileId, listingBackImg, listingClaimed: false,listingCardId: listingCardId, ...values}
-        console.log(listing)
 
         const listingPost = (updatedListing) => {
             httpConfig.post("/apis/listing/", updatedListing)
@@ -91,12 +97,12 @@ export function ListACard({match}) {
 
             httpConfig.post(`/apis/image-upload/`, values.listingFrontImg)
                 .then(reply => {
-                        let { message, type } = reply
+                        let {message, type} = reply
 
                         if (reply.status === 200) {
-                            listingPost({ ...listing, listingFrontImg: message })
+                            listingPost({...listing, listingFrontImg: message})
                         } else {
-                            setStatus({ message, type })
+                            setStatus({message, type})
                         }
                     }
                 )
@@ -121,6 +127,7 @@ export function ListACard({match}) {
 }
 
 function ListingFormContent(props) {
+    const [selectedImage, setSelectedImage] = useState(null)
     const {
         setFieldValue,
         status,
@@ -141,29 +148,42 @@ function ListingFormContent(props) {
             <div id={"listACard"}>
                 <Container className={"justify-content-center mt-3"}>
 
-                    <Row>
+                    <Row className={'justify-content-center'}>
                         <Form id={"listingForm"} onSubmit={handleSubmit}>
-                            <div className={``}>
-                                <ImageDropZone
-                                    formikProps={{
-                                        values,
-                                        handleChange,
-                                        handleBlur,
-                                        setFieldValue,
-                                        fieldValue: 'listingFrontImg'
-                                    }}
-                                />
+                            <div className={`d-flex justify-content-around flex-wrap `}>
 
-                                <Form.Group className={"mt-3"}>
-                                    <Button className="btn btn-primary" type="submit">Submit</Button>
-                                    {' '}
-                                    <Button
-                                        className="btn btn-danger"
-                                        onClick={handleReset}
-                                        disabled={!dirty || isSubmitting}
-                                    >Reset
-                                    </Button>
-                                </Form.Group>
+                                {selectedImage !== null ?
+                                    <div className={`col-3 mw-300`}>
+                                        <img className={"picture-drag-drop p-3"} src={selectedImage}
+                                             alt={"image of an up;loaded magic card"}/>
+                                    </div> : ""}
+
+                                {selectedImage !== null ? "" :
+                                    <div className={`align-items-center d-flex py-3 col-md-7 col-10`}>
+                                        <ImageDropZone
+                                            formikProps={{
+                                                values,
+                                                handleChange,
+                                                handleBlur,
+                                                setFieldValue,
+                                                fieldValue: 'listingFrontImg',
+                                                setSelectedImage: setSelectedImage
+                                            }}
+                                        />
+                                    </div>
+                                }
+
+
+                                {/*<Form.Group className={"mt-3"}>*/}
+                                {/*    <Button className="btn btn-primary" type="submit">Submit</Button>*/}
+                                {/*    {' '}*/}
+                                {/*    <Button*/}
+                                {/*        className="btn btn-danger"*/}
+                                {/*        onClick={handleReset}*/}
+                                {/*        disabled={!dirty || isSubmitting}*/}
+                                {/*    >Reset*/}
+                                {/*    </Button>*/}
+                                {/*</Form.Group>*/}
                                 <DisplayStatus status={status}/>
                             </div>
 
@@ -189,55 +209,55 @@ function ListingFormContent(props) {
 
 
                             {/*<div className={`d-flex flex-column`}>*/}
-                                <Form.Group className={"mb-3"} controlId={'listingCardDesiredValue'}>
-                                    <FloatingLabel label="Asking Value"/>
-                                    <InputGroup>
-                                        <Form.Control
-                                            className={``}
-                                            name={"listingCardDesiredValue"}
-                                            value={values.listingCardDesiredValue}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            type="text"
-                                            placeholder="$43.22"/>
-                                    </InputGroup>
-                                    <DisplayError errors={errors} touched={touched} field={"listingCardDesiredValue"}/>
-                                </Form.Group>
+                            <Form.Group className={"mb-3"} controlId={'listingCardDesiredValue'}>
+                                <FloatingLabel label="Asking Value"/>
+                                <InputGroup>
+                                    <Form.Control
+                                        className={``}
+                                        name={"listingCardDesiredValue"}
+                                        value={values.listingCardDesiredValue}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        type="text"
+                                        placeholder="$43.22"/>
+                                </InputGroup>
+                                <DisplayError errors={errors} touched={touched} field={"listingCardDesiredValue"}/>
+                            </Form.Group>
 
 
-                                <Form.Group className={"mb-3"} controlId={'listingCardDescription'}>
-                                    <FloatingLabel label="Description"/>
-                                    <InputGroup>
-                                        <Form.Control
-                                            className={``}
-                                            name={"listingCardDescription"}
-                                            value={values.listingCardDescription}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            type="text"
-                                            placeholder="blah blah"
-                                            style={{height: '150px'}}/>
-                                    </InputGroup>
-                                    <DisplayError errors={errors} touched={touched} field={"listingCardDescription"}/>
-                                </Form.Group>
+                            <Form.Group className={"mb-3"} controlId={'listingCardDescription'}>
+                                <FloatingLabel label="Description"/>
+                                <InputGroup>
+                                    <Form.Control
+                                        className={``}
+                                        name={"listingCardDescription"}
+                                        value={values.listingCardDescription}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        type="text"
+                                        placeholder="Type description of your card here"
+                                        style={{height: '150px'}}/>
+                                </InputGroup>
+                                <DisplayError errors={errors} touched={touched} field={"listingCardDescription"}/>
+                            </Form.Group>
 
 
-                                <Form.Group>
-                                    <Button id={"button1"} className={"me-3"}
-                                            variant="dark" size="lg"
-                                            onClick={handleReset}
-                                            disabled={!dirty || isSubmitting}>
-                                        Cancel
-                                    </Button>
-                                    <Button className={"gy-3"} id={"button2"} variant="dark" size="lg" type={'submit'}>
-                                        Post Listing
-                                    </Button>
-                                </Form.Group>
+                            <Form.Group>
+                                <Button id={"button1"} className={"me-3"}
+                                        variant="dark" size="lg"
+                                        onClick={handleReset}
+                                        disabled={!dirty || isSubmitting}>
+                                    Cancel
+                                </Button>
+                                <Button className={"gy-3"} id={"button2"} variant="dark" size="lg" type={'submit'}>
+                                    Post Listing
+                                </Button>
+                            </Form.Group>
 
                             {/*</div>*/}
 
                         </Form>
-                        <DisplayStatus status={status} />
+                        <DisplayStatus status={status}/>
                     </Row>
                 </Container>
             </div>
@@ -253,15 +273,20 @@ function ImageDropZone({formikProps}) {
         const formData = new FormData()
         formData.append('image', acceptedFiles[0])
 
+        const fileReader = new FileReader()
+        fileReader.readAsDataURL(acceptedFiles[0])
+        fileReader.addEventListener("load", () => {
+            formikProps.setSelectedImage(fileReader.result)
+        })
+        console.log('peep')
+        console.log(fileReader)
+
         formikProps.setFieldValue(formikProps.fieldValue, formData)
-console.log('swigity swoot')
+        console.log('swigity swoot')
         console.log(formikProps)
         //upload image here
 
-
         //figure out how to reference image
-
-
 
 
     }, [formikProps])
@@ -269,19 +294,19 @@ console.log('swigity swoot')
 
     return (
         <Form.Group className={"mb-3"} {...getRootProps()}>
-            <Form.Label>Image of card</Form.Label>
+            {/*<Form.Label>Image of card</Form.Label>*/}
             <InputGroup size="lg" className="">
-                {
-                    formikProps.values.listingFrontImg &&
-                    <>
-                        <div className="bg-transparent m-0">
-                            <Image fluid={true} height={100} rounded={true} thumbnail={true} width={100}
-                                   alt="front image" src={formikProps.values.listingFrontImg}/>
-                            {console.log(formikProps.values.listingFrontImg)}
-                        </div>
+                {/*{*/}
+                {/*    formikProps.values.listingFrontImg &&*/}
+                {/*    <>*/}
+                {/*        <div className="bg-transparent m-0">*/}
+                {/*            <Image fluid={true} height={100} rounded={true} thumbnail={true} width={100}*/}
+                {/*                   alt="front image" src={formikProps.values.listingFrontImg}/>*/}
+                {/*            {console.log(formikProps.values.listingFrontImg)}*/}
+                {/*        </div>*/}
 
-                    </>
-                }
+                {/*    </>*/}
+                {/*}*/}
                 <div
                     className="d-flex flex-fill bg-light justify-content-center align-items-center border rounded vh-25 mousehover">
                     <FormControl
