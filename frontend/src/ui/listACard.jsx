@@ -149,7 +149,7 @@ function ListingFormContent(props) {
                 <Container className={"justify-content-center mt-3"}>
 
                     <Row className={'justify-content-center'}>
-                        <Form id={"listingForm"} onSubmit={handleSubmit}>
+                        <Form id={"listingForm"} onSubmit={handleSubmit} autoComplete="off">
                             <div className={`d-flex justify-content-around flex-wrap `}>
 
                                 {selectedImage !== null ?
@@ -219,7 +219,8 @@ function ListingFormContent(props) {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         type="text"
-                                        placeholder="$43.22"/>
+                                        placeholder="Price"
+                                        autoCorrect="off"/>
                                 </InputGroup>
                                 <DisplayError errors={errors} touched={touched} field={"listingCardDesiredValue"}/>
                             </Form.Group>
