@@ -1,0 +1,250 @@
+
+
+.browse-search-bar{
+  width: 300px;
+}
+#search{
+position: relative;
+    left: 45vh;
+
+}
+
+.username{
+
+    left: 70vh
+}
+
+#login{
+}
+
+
+
+#listingForm{
+    width: 60%;
+}
+
+
+
+#listACard {
+    background: url(./castle.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+}
+
+#signUp {
+    background: url(./valley.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-size: cover;
+}
+
+@media (max-width:768px) {
+    .justify-form {
+        justify-content: center !important;
+    }
+}
+
+.justify-form {
+    justify-content: left;
+}
+
+.home-image{
+    background: url("");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+#username {
+    color: white;
+}
+
+#star {
+    height: 5vh;
+}
+
+#profile {
+    background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.8), rgba(35,31,32,0.7)), url(./flesh.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-width: 95vw;
+    background-size: cover;
+}
+
+
+
+/*.home-image {*/
+/*    background-size: cover;*/
+/*    background: url("../Images/blankcard.png") no-repeat fixed center center;*/
+/*    height: 100vh;*/
+/*}*/
+
+.vh-10{
+    height: 10vh;
+}
+
+.navbarfont{
+    font-size:large;
+}
+
+.backgroundhome{
+    background-color: saddlebrown;
+}
+
+#dragon{
+    background-size: cover;
+    background: lightgray url(../Images/shimmerdragon.jpg) no-repeat center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.button-container{
+    justify-content: space-between;
+    width: 200px
+}
+
+
+.homepage-text{
+    font-size: large;
+    color: white;
+}
+
+.mousehover {
+    cursor: pointer;
+}
+.mousehover:hover {
+    background: #ffffffcc !important;
+}
+.vh-25 {
+    height: 25vh;
+   }
+.browseCardSearchContainer {
+    background-color: #00000077;
+    border-radius: 5px;
+    padding: 1.5em;
+}
+.browse-background {
+    background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.8), rgba(35,31,32,0.7)), url(../Images/483550.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-size: cover;
+}
+
+.message{
+    position: relative;
+    left: 60vh;
+}
+
+.button-browse{
+/*position: relative;*/
+/*right: 29vw;*/
+
+}
+
+.signin-background {
+    background-size: cover;
+    background: lightgray url(../Images/Mtg-Wallpapers-HD-For-Desktop.jpg) no-repeat center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signin-search-bar{
+    width: 300px;
+}
+
+
+.message-background {
+    background-size: cover;
+    background: lightgray url(../Images/483501.jpg) no-repeat center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.message-history-placeholder{
+    background: #00000066;
+    height: 40vh;
+    width: 50vh;
+    border-radius: 8%;
+    margin: 1em;
+}
+
+.message-history-placeholder-text{
+   padding: 2.5em 2.5em;
+    font-weight: bolder;
+    color: #fff;
+}
+
+.browsecard-text{
+    color: white;
+}
+
+
+.cardImageWrapper {
+
+
+}
+
+/*.cardImage{*/
+/*    height: 150px;*/
+/*    width: auto;*/
+/*}*/
+
+.card-corners{
+    border-radius: 10px;
+}
+
+.card-drop-shadow{
+    filter: drop-shadow(30px 10px 4px #00000040);
+}
+
+
+.picture-drag-drop{
+    min-width: 300px;
+    width: 100%;
+}
+.mw-300 {
+    min-width: 300px;
+}
+
+#cardTextWrapper {
+
+}
+
+/*#cardText {*/
+/*    height: 100px;*/
+/*    width: auto;*/
+/*}*/
+
+.profile-background {
+
+}
+
+#cardHeight {
+    /*height: 500px;*/
+height: 100%;
+}
+
+#button1 {
+
+
+}

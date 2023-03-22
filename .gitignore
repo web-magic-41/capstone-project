@@ -24,3 +24,12 @@ project.env
 */npm-debug.log*
 */yarn-debug.log*
 */yarn-error.log*
+
+
+frontend/setupProxy.js
+
+/backend/dataDownloader/*
+
+node_modules
+package-lock.json
+package.json
