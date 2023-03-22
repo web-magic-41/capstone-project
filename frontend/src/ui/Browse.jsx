@@ -52,7 +52,7 @@ export function Browse() {
 
     return (
         <>
-            <div className={`browse-background d-flex `}>
+            <div className={`browse-background pt-5 d-flex flex-column align-items-center justify-content-start`}>
                 <Formik
                     initialValues={card}
                     onSubmit={submit}
@@ -83,9 +83,11 @@ function BrowseListingForm(props) {
 
 
     return (
-        <>
+        <div className={'browseCardSearchContainer'}>
+            <p className="browsecard-text">Search for Listings</p>
             <Form onSubmit={handleSubmit}>
-                <div className={`d-flex justify-content-center align-items-center pt-5 h-100`}>
+                <div className={``}>
+                {/*<div className={`d-flex justify-content-center align-items-center pt-5 h-100`}>*/}
                     <div className={''}>
                         <Form.Group controlId="cardName">
                         <FloatingLabel className={'mb-3'}  label="Search">
@@ -110,6 +112,6 @@ function BrowseListingForm(props) {
             </Form>
 
 
-        </>
+        </div>
     )
 }
