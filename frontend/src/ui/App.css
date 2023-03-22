@@ -73,7 +73,7 @@ position: relative;
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    min-width: 100vw;
+    min-width: 95vw;
     background-size: cover;
 }
 
@@ -200,15 +200,14 @@ position: relative;
 
 
 .cardImageWrapper {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
+
+
 }
 
-.cardImage{
-    height: 150px;
-    width: auto;
-}
+/*.cardImage{*/
+/*    height: 150px;*/
+/*    width: auto;*/
+/*}*/
 
 .card-corners{
     border-radius: 10px;
@@ -219,14 +218,23 @@ position: relative;
 }
 
 #cardTextWrapper {
-    overflow-x: hidden;
+
 }
 
-#cardText {
-    height: 100px;
-    width: auto;
-}
+/*#cardText {*/
+/*    height: 100px;*/
+/*    width: auto;*/
+/*}*/
 
 .profile-background {
+
+}
+
+#cardHeight {
+    /*height: 500px;*/
+height: 100%;
+}
+
+#button1 {
 
 }
