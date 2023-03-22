@@ -23,7 +23,8 @@ export function ListingCard({listing,profile,card}) {
 
                 <Card.Text id={"cardTextWrapper"}>
                     <div id={"cardText"}>
-                    <h2>{card && card.cardName} {listing.listingCardDesiredValue} </h2>
+                    <h2>{card && card.cardName}  </h2>
+                        <h2>{listing.listingCardDesiredValue}</h2>
 
                        <p>Listed by: {profile && profile.profileUsername}</p>
 
