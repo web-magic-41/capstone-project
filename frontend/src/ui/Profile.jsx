@@ -8,37 +8,41 @@ import {fetchCurrentUser} from "../store/currentUser.js";
 import {fetchAllListings} from "../store/listings.js";
 import {ListingCard} from "./ListingCard.jsx";
 import {httpConfig} from "../../utils/http-config.js";
+import {useParams} from "react-router-dom";
+import {fetchProfileByProfileId} from "../store/profiles.js";
+import {getRatingByRatedProfileId} from "../store/rating.js";
 
 export function Profile() {
 
     const dispatch = useDispatch()
+    const {profileId} = useParams()
 
 
     const [altProfile, setAltProfile] = useState(null)
 
-    const handleSetAltProfile = (obj) => {
-        setAltProfile(obj)
-    }
-    //set this to first check the url for data before displaying current user.
-    let profile = useSelector(state => {
-        if(altProfile) return altProfile;
-        //if navigating to another profile get that profile id from path
-        if (location.pathname.substr(9).length) {
-            //if pathname contains a profileId
-            let tempProfileId = location.pathname.substr(9);
-
-            httpConfig.get(`/apis/profile/${tempProfileId}`)
-                .then(reply => {
-                        if (reply.status === 200) {
-                            handleSetAltProfile(reply.data)
-                        }
-                    }
-                );
-        }
-
-
-        return state.currentUser ? state.currentUser : null;
-    })
+    // const handleSetAltProfile = (obj) => {
+    //     setAltProfile(obj)
+    // }
+    // //set this to first check the url for data before displaying current user.
+    // let profile = useSelector(state => {
+    //     if(altProfile) return altProfile;
+    //     //if navigating to another profile get that profile id from path
+    //     if (location.pathname.substr(9).length) {
+    //         //if pathname contains a profileId
+    //         let tempProfileId = location.pathname.substr(9);
+    //
+    //         httpConfig.get(`/apis/profile/${tempProfileId}`)
+    //             .then(reply => {
+    //                     if (reply.status === 200) {
+    //                         handleSetAltProfile(reply.data)
+    //                     }
+    //                 }
+    //             );
+    //     }
+    //
+    //
+    //     return state.currentUser ? state.currentUser : null;
+    // })
     const cards = useSelector(state => state?.donovansCards ? state.donovansCards : {})
 
 
@@ -46,9 +50,11 @@ export function Profile() {
 
 
     const sideEffects = () => {
-        dispatch(fetchCurrentUser())
         dispatch(fetchAllListings())
+        dispatch(fetchProfileByProfileId(profileId))
+        dispatch(getRatingByRatedProfileId(profileId))
     }
+    const profile = useSelector(state => state.profiles[profileId] ?? null)
     const listings = useSelector(state => {
         if (state?.listings.constructor.name === "Object") {
             return Object.values(state.listings).filter(x => {
@@ -56,7 +62,17 @@ export function Profile() {
             })
         } else return []
     })
-    React.useEffect(sideEffects, [dispatch])
+    const ratings = useSelector(state => {
+        console.log(state)
+        if (state?.ratings.constructor.name === "Object") {
+        return Object.values(state.ratings)
+        }
+        return []
+        })
+    console.log(ratings)
+    React.useEffect(sideEffects, [dispatch, profileId])
+
+
 
     return (
         <>

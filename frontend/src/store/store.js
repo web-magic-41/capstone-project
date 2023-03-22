@@ -5,9 +5,10 @@ import cards from "./cards.js";
 import auth from "./auth.js";
 import card from "./card.js";
 import currentUser from "./currentUser.js";
+import rating from "./rating.js";
 
 
-const reducer = combineReducers({listings:listings,profiles:profiles, auth:auth, cards:card, donovansCards:cards, currentUser:currentUser})
+const reducer = combineReducers({listings:listings,profiles:profiles, auth:auth, cards:card, donovansCards:cards, currentUser:currentUser, ratings:rating})
 
 //const reducer = combineReducers({listings, profiles, cards, auth:auth})
 

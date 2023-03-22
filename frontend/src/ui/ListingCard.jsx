@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import cards from "../store/cards.js";
+import {Link} from "react-router-dom";
 
 
 
@@ -26,7 +27,7 @@ export function ListingCard({listing,profile,card}) {
                     <h2>{card && card.cardName}  </h2>
                         <h2>{listing.listingCardDesiredValue}</h2>
 
-                       <p>Listed by: {profile && profile.profileUsername}</p>
+                        <Link to={`/profile/${profile.profileId}`}>  <p>Listed by: {profile && profile.profileUsername}</p></Link>
 
 
                         {listing.listingCardDescription}
