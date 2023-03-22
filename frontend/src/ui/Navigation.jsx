@@ -25,7 +25,7 @@ export function Navigation() {
                             <Nav.Link href="/browseCard">Create Listing</Nav.Link>
                             <Nav.Link href="/profile">Profile</Nav.Link>
                             <Nav.Link href="/messages">Messages</Nav.Link>
-                            <Nav.Link href="/log-out">Log Out</Nav.Link>
+                            <Nav.Link href="/home">Log Out</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

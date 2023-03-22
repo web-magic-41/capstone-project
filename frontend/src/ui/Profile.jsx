@@ -61,7 +61,7 @@ export function Profile() {
     return (
         <>
             <div id={"profile"}>
-                <Container>
+                <Container className={""}>
                     <Row className={"pt-3"}>
                         <Col>
                             {/*<Image src={cat} fluid={true} alt="placeHolder"/>*/}
@@ -129,16 +129,16 @@ export function Profile() {
                         {/*        </Form>*/}
                         {/*    </Col>*/}
                     </Row>
-                    <div className={'w-100 h-50 d-flex'}>
+                    <Row lg={4} >
                         {listings.length > 0 ? listings.map((item) => {
                             return (
-                                <div className={'col-md-3 col-10 p-3'}>
+
                                     <ListingCard profile={profile} card={cards[item.listingCardId]} listing={item}/>
-                                </div>
+
                             )
                         }) : <></>
                         }
-                    </div>
+                    </Row>
                 </Container>
             </div>
         </>
