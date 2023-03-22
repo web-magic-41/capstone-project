@@ -129,12 +129,12 @@ export function Profile() {
                         {/*        </Form>*/}
                         {/*    </Col>*/}
                     </Row>
-                    <Row md={2} className={""}>
+                    <Row md={12}>
                         {listings.length > 0 ? listings.map((item) => {
                             return (
-
+                                <div className={'col-md-3 col-10 p-3'}>
                                     <ListingCard profile={profile} card={cards[item.listingCardId]} listing={item}/>
-
+                                </div>
                             )
                         }) : <></>
                         }
