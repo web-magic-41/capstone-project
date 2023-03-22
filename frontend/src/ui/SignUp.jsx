@@ -7,10 +7,14 @@ import {Formik} from "formik";
 import {DisplayStatus} from "./componets/DisplayStatus.jsx";
 import {DisplayError} from "./componets/DisplayError.jsx";
 import {useNavigate} from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import {getAuth} from "../store/auth.js";
+import {useDispatch} from "react-redux";
 
 
 export function SignUp() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const signUp = {
         profileEmail: "",
         profileUsername: "",
@@ -42,9 +46,7 @@ export function SignUp() {
                     let {message, type} = reply;
 
                     if (reply.status === 200) {
-                        setTimeout(() => {
-                            navigate("/profile")
-                        }, 1000);
+                        submitSignIn(values)
                        resetForm();
                     }
                     setStatus({message, type});
@@ -52,6 +54,27 @@ export function SignUp() {
             );
     };
 
+    const submitSignIn = (values) => {
+        httpConfig.post("/apis/sign-in/", values)
+            .then(reply => {
+                let {message, type} = reply;
+
+                if (reply.status === 200 && reply.headers["authorization"]) {
+                    window.localStorage.removeItem("authorization");
+                    window.localStorage.setItem("authorization", reply.headers["authorization"]);
+
+                    let jwtToken = jwtDecode(reply.headers["authorization"])
+                    dispatch(getAuth(jwtToken))
+
+                    setTimeout(() => {
+                        navigate("/profile")
+                    }, 1000);
+
+
+                }
+                setStatus({message, type});
+            });
+    };
     return (
         <>
 
@@ -86,7 +109,7 @@ export function SignUp() {
             <Container className={" mt-5"}>
                 <Row>
                     <Col className={"d-flex justify-content-center"}>
-                        <Form onSubmit={handleSubmit} id={"listingForm"}>
+                        <Form onSubmit={handleSubmit}  autoComplete="off" id={"listingForm"}>
 
                             <Form.Group className={"mb-3"}>
                                 <FloatingLabel controlId="profileUsername" label="Username">

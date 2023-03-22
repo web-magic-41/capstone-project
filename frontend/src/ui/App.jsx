@@ -14,7 +14,7 @@ import {Profile} from "./Profile";
 import {Provider} from "react-redux";
 import React from "react";
 import {BrowseCard} from "./BrowseCard.jsx";
-
+// import{fastar} from "@fortawesome/free-solid-svg-icons"
 
 
 export function App({store}) {

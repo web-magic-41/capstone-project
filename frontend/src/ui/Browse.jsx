@@ -85,7 +85,7 @@ function BrowseListingForm(props) {
     return (
         <div className={'browseCardSearchContainer'}>
             <p className="browsecard-text">Search for Listings</p>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} autoComplete="off">
                 <div className={``}>
                 {/*<div className={`d-flex justify-content-center align-items-center pt-5 h-100`}>*/}
                     <div className={''}>

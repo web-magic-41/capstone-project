@@ -81,7 +81,7 @@ function SigninFormContent(props) {
     return (<div className={`signin-background`}>
             <div className={'d-flex flex-column align-items-center'}>
 
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} autoComplete="off">
 
                     <FloatingLabel className={'mb-3'} controlId="profileEmail" label="Email">
                         <Form.Control onChange={handleChange} onBlur={handleBlur} value={values.profileEmail}

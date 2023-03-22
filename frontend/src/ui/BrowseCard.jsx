@@ -67,7 +67,7 @@ export function BrowseCard() {
                 // }
 
                 return (
-                    <div className={`col-md-3 col-12 d-flex justify-content-center pb-2`}>
+                    <div className={`col-md-3 col-12 d-flex justify-content-center pb-4`}>
                     <a className={`d-flex justify-content-around`} href={`http://${document.location.host}/ListACard/${card.cardId}`}>
                         <img className={`w-75 card-corners`} src={card.cardImageUrl} alt={`Image of the Magic card: ${card.cardName}`}/>
                     </a>
@@ -102,7 +102,7 @@ function BrowseCardForm(props) {
         <div className={`browseCardSearchContainer`}>
 
             <p className="browsecard-text">Select a card name to create a listing for that card.</p>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} autoComplete="off">
 
                 <div className={''}>
 
