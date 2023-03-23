@@ -90,17 +90,17 @@ function BrowseListingForm(props) {
                 {/*<div className={`d-flex justify-content-center align-items-center pt-5 h-100`}>*/}
                     <div className={''}>
                         <Form.Group controlId="cardName">
-                        <FloatingLabel className={'mb-3'}  label="Search">
-                            <Form.Control
-                                className={'browse-search-bar'}
-                                type="Search Criteria"
-                                placeholder="Search Criteria"
-                                name={"cardName"}
-                                value={values.cardName}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            />
-                        </FloatingLabel>
+                            <FloatingLabel className={'mb-3'} label="Search">
+                                <Form.Control
+                                    className={'browse-search-bar'}
+                                    type="Search Criteria"
+                                    placeholder="Search Criteria"
+                                    name={"cardName"}
+                                    value={values.cardName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </FloatingLabel>
                         </Form.Group>
                     </div>
 
